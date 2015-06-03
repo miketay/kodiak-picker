@@ -1,0 +1,21 @@
+{
+  "name": "kodiak-picker",
+  "version": "0.0.1",
+  "authors": [
+    "Ryan Born <ryanb@gurutechnologies.net>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "~0.9.7",
+    "angular-messages": "~1.4.0",
+    "angular-resource": "~1.4.0",
+    "angular-route": "~1.4.0"
+  }
+}
