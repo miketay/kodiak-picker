@@ -21,7 +21,7 @@ CREATE TABLE tutorials (
 	name         TEXT,
 	cycle_id     INTEGER,
 	room_number  TEXT,
-	teacher_name INTEGER,
+	teacher_name TEXT,
 	max_students INTEGER
 );
 CREATE TABLE students_tutorials (
