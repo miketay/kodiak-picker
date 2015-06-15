@@ -16,44 +16,51 @@
 $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="kodiak" ng-controller="MainController">
 <head>
     <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title ng-bind="page.title()">Kodiak Picker</title>
+	<?= $this->Html->meta('icon') ?>
 
     <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+	<base href="<?= $this->request->webroot; ?>">
+
+	<link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css" />
+	<?= $this->Html->css('app.css') ?>
+
 </head>
-<body>
-    <header>
-        <div class="header-title">
-            <span><?= $this->fetch('title') ?></span>
-        </div>
-        <div class="header-help">
-            <span><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></span>
-            <span><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></span>
-        </div>
-    </header>
-    <div id="container">
+<body layout="row">
+	<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left">
+		<md-toolbar>
+			<h1 class="md-toolbar-tools">
+				<a ng-href="/" layout="row" flex class="site-logo">
+					<!--<md-icon md-svg-icon="logo" class="logo"></md-icon>-->
+					<div class="site-logotype" layout="column" layout-align="center">Kodiak</div>
+				</a>
+			</h1>
+		</md-toolbar>
+		<md-content flex role="navigation">
+			<md-list class="leftNav">
+				<md-item ng-repeat="it in nav.items()">
+					<md-button ng-click="select(it)" ng-class="{'selected': nav.selected(it)}">
+						<md-icon md-svg-icon="{{it.icon}}" class=""></md-icon>
+						{{it.text}}
+					</md-button>
+				</md-item>
+			</md-list>
+		</md-content>
+	</md-sidenav>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic">
 
-        <div id="content">
-            <?= $this->Flash->render() ?>
+	<script src="/bower_components/angular/angular.min.js"></script>
+	<script src="/bower_components/angular-route/angular-route.min.js"></script>
+	<script src="/bower_components/angular-resource/angular-resource.min.js"></script>
+	<script src="/bower_components/angular-messages/angular-messages.min.js"></script>
+	<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+	<script src="/bower_components/angular-aria/angular-aria.min.js"></script>
+	<script src="/bower_components/angular-material/angular-material.min.js"></script>
 
-            <div class="row">
-                <?= $this->fetch('content') ?>
-            </div>
-        </div>
-        <footer>
-        </footer>
-    </div>
+	<!-- add modules here -->
 </body>
 </html>
