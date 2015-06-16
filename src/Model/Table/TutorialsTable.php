@@ -52,11 +52,11 @@ class TutorialsTable extends Table
         $validator
             ->allowEmpty('name');
             
-        $validator
+		$validator
+			->add('room_number', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('room_number');
             
         $validator
-            ->add('teacher_name', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('teacher_name');
             
         $validator

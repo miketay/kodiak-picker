@@ -42,17 +42,20 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('Route');
 
 Router::scope('/', function ($routes) {
+
+	$routes->connect('*', ['controller' => 'Pages', 'action' => 'display']);
+
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    // $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
-    $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+    // $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
     /**
      * Connect catchall routes for all controllers.
@@ -70,12 +73,14 @@ Router::scope('/', function ($routes) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
-	$routes->fallbacks('InflectedRoute');
+	// $routes->fallbacks('InflectedRoute');
 });
 
 Router::scope('/api', function($routes) {
-	$routes->extensions(['json']);
-	$routes->resources('Tutorials');
+	$routes->extensions(['json','xml']);
+	$routes->resources('Cycles', function($routes) {
+		$routes->resources('Tutorials');
+	});
 });
 
 /**

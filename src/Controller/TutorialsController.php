@@ -11,6 +11,12 @@ use App\Controller\AppController;
 class TutorialsController extends AppController
 {
 
+	public function initialize()
+	{
+		parent::initialize();
+		$this->loadComponent('RequestHandler');
+	}
+
     /**
      * Index method
      *
@@ -48,20 +54,21 @@ class TutorialsController extends AppController
      */
     public function add()
     {
-        $tutorial = $this->Tutorials->newEntity();
-        if ($this->request->is('post')) {
+		$tutorial = $this->Tutorials->newEntity();
+		if ($this->request->is('post')) {
+			$message = "";
             $tutorial = $this->Tutorials->patchEntity($tutorial, $this->request->data);
             if ($this->Tutorials->save($tutorial)) {
-                $this->Flash->success(__('The tutorial has been saved.'));
-                return $this->redirect(['action' => 'index']);
+				$message = 'Saved';
             } else {
-                $this->Flash->error(__('The tutorial could not be saved. Please, try again.'));
-            }
+				$message = $tutorial->errors();
+			}
+			$this->set([
+				'message' => $message,
+				'tutorial' => $tutorial,
+				'_serialize' => ['message', 'tutorial']
+			]);
         }
-        $cycles = $this->Tutorials->Cycles->find('list', ['limit' => 200]);
-        $students = $this->Tutorials->Students->find('list', ['limit' => 200]);
-        $this->set(compact('tutorial', 'cycles', 'students'));
-        $this->set('_serialize', ['tutorial']);
     }
 
     /**
