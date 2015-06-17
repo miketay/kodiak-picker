@@ -23,12 +23,18 @@ class TutorialsController extends AppController
      * @return void
      */
     public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Cycles']
-        ];
-        $this->set('tutorials', $this->paginate($this->Tutorials));
-        $this->set('_serialize', ['tutorials']);
+	{
+		$conditions = [];
+		if (isset($this->request->params['cycle_id'])) {
+			$conditions['cycle_id'] = $this->request->params['cycle_id'];
+		} elseif (isset($this->request->params['student_id'])) {
+			$conditions['student_id'] = $this->request->params['student_id'];
+		}
+		$tutorials = $this->Tutorials->find('all', ['conditions' => $conditions]);
+		$this->set([
+			'tutorials' => $tutorials,
+			'_serialize' => ['tutorials']
+		]);
     }
 
     /**
@@ -39,8 +45,15 @@ class TutorialsController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null)
-    {
-        $tutorial = $this->Tutorials->get($id, [
+	{
+		$conditions = [];
+		if (isset($this->request->params['cycle_id'])) {
+			$conditions['cycle_id'] = $this->request->params['cycle_id'];
+		} elseif (isset($this->request->params['student_id'])) {
+			$conditions['student_id'] = $this->request->params['student_id'];
+		}
+		$tutorial = $this->Tutorials->get($id, [
+			'conditions' => $conditions,
             'contain' => ['Cycles', 'Students']
         ]);
         $this->set('tutorial', $tutorial);
@@ -57,11 +70,12 @@ class TutorialsController extends AppController
 		$tutorial = $this->Tutorials->newEntity();
 		if ($this->request->is('post')) {
 			$message = "";
+			$this->request->data['cycle_id'] = $this->request->params['cycle_id'];
             $tutorial = $this->Tutorials->patchEntity($tutorial, $this->request->data);
             if ($this->Tutorials->save($tutorial)) {
-				$message = 'Saved';
+				$message = __('Tutorial saved');
             } else {
-				$message = $tutorial->errors();
+				$message = __('Tutorial could not be saved');
 			}
 			$this->set([
 				'message' => $message,
@@ -84,18 +98,17 @@ class TutorialsController extends AppController
             'contain' => ['Students']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $tutorial = $this->Tutorials->patchEntity($tutorial, $this->request->data);
-            if ($this->Tutorials->save($tutorial)) {
-                $this->Flash->success(__('The tutorial has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The tutorial could not be saved. Please, try again.'));
-            }
-        }
-        $cycles = $this->Tutorials->Cycles->find('list', ['limit' => 200]);
-        $students = $this->Tutorials->Students->find('list', ['limit' => 200]);
-        $this->set(compact('tutorial', 'cycles', 'students'));
-        $this->set('_serialize', ['tutorial']);
+			$tutorial = $this->Tutorials->patchEntity($tutorial, $this->request->data);
+			$message = __("Tutorial saved");
+            if (!$this->Tutorials->save($tutorial)) {
+				$message = __("Tutorial could not be saved");
+			}
+		}
+		$this->set([
+			'message' => $message,
+			'tutorial' => $tutorial,
+			'_serialize' => ['message', 'tutorial']
+		]);
     }
 
     /**
@@ -108,12 +121,15 @@ class TutorialsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $tutorial = $this->Tutorials->get($id);
-        if ($this->Tutorials->delete($tutorial)) {
-            $this->Flash->success(__('The tutorial has been deleted.'));
-        } else {
-            $this->Flash->error(__('The tutorial could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(['action' => 'index']);
-    }
+		$tutorial = $this->Tutorials->get($id);
+		$message = __("Tutorial deleted");
+        if (!$this->Tutorials->delete($tutorial)) {
+			$message = __("Tutorial could not be deleted");
+		}
+		$this->set([
+			'message' => $message,
+			'_serialize' => ['message']
+		]);
+	}
 }
+

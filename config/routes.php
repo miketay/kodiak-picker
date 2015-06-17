@@ -81,6 +81,10 @@ Router::scope('/api', function($routes) {
 	$routes->resources('Cycles', function($routes) {
 		$routes->resources('Tutorials');
 	});
+	$routes->resources('Students', function($routes) {
+		$routes->resources('Tutorials');
+	});
+	$routes->resources('Users');
 });
 
 /**

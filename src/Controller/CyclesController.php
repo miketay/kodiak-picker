@@ -23,8 +23,9 @@ class CyclesController extends AppController
      * @return void
      */
     public function index()
-    {
-        $this->set('cycles', $this->paginate($this->Cycles));
+	{
+		$cycles = $this->Cycles->find('all');
+        $this->set('cycles', $cycles);
         $this->set('_serialize', ['cycles']);
     }
 
@@ -52,17 +53,18 @@ class CyclesController extends AppController
     public function add()
     {
         $cycle = $this->Cycles->newEntity();
-        if ($this->request->is('post')) {
+		if ($this->request->is('post')) {
+			$message = __("Cycle has been saved");
             $cycle = $this->Cycles->patchEntity($cycle, $this->request->data);
-            if ($this->Cycles->save($cycle)) {
-                $this->Flash->success(__('The cycle has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The cycle could not be saved. Please, try again.'));
+            if (!$this->Cycles->save($cycle)) {
+				$message = __("Cycle could not be saved");
             }
         }
-        $this->set(compact('cycle'));
-        $this->set('_serialize', ['cycle']);
+		$this->set([
+			'message' => $message,
+			'cycle' => $cycle,
+			'_serialize' => ['message', 'cycle']
+		]);
     }
 
     /**
@@ -78,16 +80,17 @@ class CyclesController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $cycle = $this->Cycles->patchEntity($cycle, $this->request->data);
-            if ($this->Cycles->save($cycle)) {
-                $this->Flash->success(__('The cycle has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The cycle could not be saved. Please, try again.'));
+			$cycle = $this->Cycles->patchEntity($cycle, $this->request->data);
+			$message = __("Cycle has been saved");
+            if (!$this->Cycles->save($cycle)) {
+				$message = __("Cycle could not be saved");
             }
-        }
-        $this->set(compact('cycle'));
-        $this->set('_serialize', ['cycle']);
+		}
+		$this->set([
+			'message' => $message,
+			'cycle' => $cycle,
+			'_serialize' => ['message', 'cycle']
+		]);
     }
 
     /**
@@ -99,13 +102,15 @@ class CyclesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $cycle = $this->Cycles->get($id);
-        if ($this->Cycles->delete($cycle)) {
-            $this->Flash->success(__('The cycle has been deleted.'));
-        } else {
-            $this->Flash->error(__('The cycle could not be deleted. Please, try again.'));
+        $this->request->allowMethod(['delete']);
+		$cycle = $this->Cycles->get($id);
+		$message = __("Cycle has been deleted");
+        if (!$this->Cycles->delete($cycle)) {
+			$message = __("Cycle could not be saved");
         }
-        return $this->redirect(['action' => 'index']);
+		$this->set([
+			'message' => $message,
+			'_serialize' => ['message']
+		]);
     }
 }

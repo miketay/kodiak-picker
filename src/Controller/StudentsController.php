@@ -10,6 +10,12 @@ use App\Controller\AppController;
  */
 class StudentsController extends AppController
 {
+	
+	public function initialize()
+	{
+		parent::initialize();
+		$this->loadComponent('RequestHandler');
+	}
 
     /**
      * Index method
@@ -45,19 +51,19 @@ class StudentsController extends AppController
      */
     public function add()
     {
-        $student = $this->Students->newEntity();
+		$student = $this->Students->newEntity();
         if ($this->request->is('post')) {
+			$message = __("Student added");
             $student = $this->Students->patchEntity($student, $this->request->data);
-            if ($this->Students->save($student)) {
-                $this->Flash->success(__('The student has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The student could not be saved. Please, try again.'));
+            if (!$this->Students->save($student)) {
+				$message = __("Student could not be added");
             }
+			$this->set([
+				'message' => $message,
+				'student' => $student,
+				'_serialize' => ['message','student']
+			]);
         }
-        $tutorials = $this->Students->Tutorials->find('list', ['limit' => 200]);
-        $this->set(compact('student', 'tutorials'));
-        $this->set('_serialize', ['student']);
     }
 
     /**
@@ -73,17 +79,17 @@ class StudentsController extends AppController
             'contain' => ['Tutorials']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $student = $this->Students->patchEntity($student, $this->request->data);
-            if ($this->Students->save($student)) {
-                $this->Flash->success(__('The student has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The student could not be saved. Please, try again.'));
-            }
+			$student = $this->Students->patchEntity($student, $this->request->data);
+			$message = __("Student saved");
+            if (!$this->Students->save($student)) {
+				$message = __("Student could not be saved");
+			}
+			$this->set([
+				'message' => $message,
+				'student' => $student,
+				'_serialize' => ['message', 'student']
+			]);
         }
-        $tutorials = $this->Students->Tutorials->find('list', ['limit' => 200]);
-        $this->set(compact('student', 'tutorials'));
-        $this->set('_serialize', ['student']);
     }
 
     /**
@@ -95,13 +101,15 @@ class StudentsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $student = $this->Students->get($id);
-        if ($this->Students->delete($student)) {
-            $this->Flash->success(__('The student has been deleted.'));
-        } else {
-            $this->Flash->error(__('The student could not be deleted. Please, try again.'));
+        $this->request->allowMethod(['delete']);
+		$student = $this->Students->get($id);
+		$message = __("Student Deleted");
+        if (!$this->Students->delete($student)) {
+			$message = __("Student could not be deleted");
         }
-        return $this->redirect(['action' => 'index']);
+		$this->set([
+			'message' => $message,
+			'_serialize' => ['message']
+		]);
     }
 }
