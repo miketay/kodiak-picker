@@ -26,8 +26,10 @@
 	<base href="<?= $this->request->webroot; ?>">
 
 	<link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css" />
-	<?= $this->Html->css('app.css') ?>
-
+	<link rel="stylesheet" href="/css/app.css" />
+<script>
+FULL_BASE_URL = '<?= $this->request->webroot; ?>';
+</script>
 </head>
 <body layout="row">
 	<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left">
@@ -61,5 +63,20 @@
 	<script src="/bower_components/angular-material/angular-material.min.js"></script>
 
 	<!-- add modules here -->
+	<script src="/js/config/Config.js"></script>
+	<script src="/js/config/Constants.js"></script>
+	<script src="/js/config/Routes.js"></script>
+
+	<script src="/js/auth/Auth.js"></script>
+	<script src="/js/auth/provider/AuthFactory.js"></script>
+	<script src="/js/auth/resource/UserResource.js"></script>
+	
+	<script src="/js/page/Page.js"></script>
+	<script src="/js/page/provider/PageFactory.js"></script>
+	<script src="/js/page/provider/NavFactory.js"></script>
+	<script src="/js/page/controller/MainController.js"></script>
+	<script src="/js/page/controller/LandingController.js"></script>
+
+	<script src="/js/main.js"></script>
 </body>
 </html>
