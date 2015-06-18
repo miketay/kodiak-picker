@@ -116,9 +116,36 @@ class StudentsController extends AppController
 	public function import()
 	{
 		// get file and parse it into db
+		$file = $this->request->input();
+		$listStart = strpos($file, "last_name");
+		$file = substr($file, $listStart);
+		$file = explode("\r\n", $file);
+
+		$headers = explode("\t", $file[0]);
+		$students = [];
+		$rows = count($file);
+		for ($i = 1; $i<$rows; $i++) {
+			$row = explode("\t", $file[$i]);
+			if (count($row) <= 1) {
+				break;
+			}
+			$num = count($row);
+			$student = [];
+			for ($j = 0; $j<$num; $j++) {
+				$header = $headers[$j] == "Student_Number" ? "id" : $headers[$j];
+				$student[$header] = is_numeric($row[$j]) ? intval($row[$j]) : $row[$j];
+			}
+			$students[] = $student;
+		}
+
+		// TODO: put students into database, this doesn't seem to work...
+		$result = $this->Students->save($students);
+				
+
 		$this->set([
+			'result' => $result,
 			'message' => "Success",
-			'_serialize' => ['message']
+			'_serialize' => ['result','message']
 		]);
 	}
 }
