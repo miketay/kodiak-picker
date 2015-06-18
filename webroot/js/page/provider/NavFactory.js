@@ -8,14 +8,19 @@
 					{
 						"icon": "",
 						"text": "Home",
-						"url": "/",
+						"url": "/"
 					},
+					{
+						"icon": "",
+						"text": "Import Students",
+						"url": "/import"
+					}
 				],
                 [ // admin
                     {
                         "icon": "",
                         "text": "Admin",
-                        "url": "/admin",
+                        "url": "/admin"
                     }
                 ]
 			];

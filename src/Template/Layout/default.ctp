@@ -92,6 +92,10 @@ FULL_BASE_URL = '<?= $this->request->webroot; ?>';
 	<script src="/js/page/controller/MainController.js"></script>
 	<script src="/js/page/controller/LandingController.js"></script>
 
+	<script src="/js/student/Student.js"></script>
+	<script src="/js/student/controller/StudentImportController.js"></script>
+	<script src="/js/student/resource/StudentResource.js"></script>
+
 	<script src="/js/main.js"></script>
 </body>
 </html>

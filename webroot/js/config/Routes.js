@@ -9,26 +9,11 @@
 					controller: "LandingController",
 					requiredLogin: 0
 				},
-				"/sign-in": {
-					templateUrl: "/js/auth/view/auth.html",
-					controller: "AuthController",
-					requiredLogin: 0
-				},
-				"/logout": {
-					templateUrl: "/js/auth/view/auth.html",
-					controller: "AuthController",
-					requiredLogin: 1
-				},
-				"/users": {
-					templateUrl: "/js/users/view/index.html",
-					controller: "UserListController",
-					requiredLogin: 0
-				},
-				"/users/:id": {
-					templateUrl: "/js/users/view/user.html",
-					controller: "UserDetailController",
-					requiredLogin: 0
-				},
+				"/import": {
+					templateUrl: "/js/student/view/import.html",
+					controller: "StudentImportController",
+					requiredLogin: 0 // TODO: change when authentication is implemented
+				}
 			};
 
 			return {
