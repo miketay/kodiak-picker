@@ -1,3 +1,14 @@
-<div layout="column">
-	<input type="file" ng-model="file" />
+<div layout="row">
+	<form name="uploadForm">
+		<strong>Upload student list:</strong>
+		<md-input-container>
+			<button class="md-button md-primary md-raised">
+				Choose File
+				<input type="file" name="files" file-upload="upload" ng-model="file" aria-label="Choose File" />
+			</button>
+			<div ng-messages="uploadForm.files.$error">
+				<div ng-message="fileType">File type must be .text</div>
+			</div>
+		</md-input-container>
+	</form>
 </div>

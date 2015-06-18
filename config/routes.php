@@ -41,50 +41,29 @@ use Cake\Routing\Router;
  */
 Router::defaultRouteClass('Route');
 
-Router::scope('/', function ($routes) {
-
-	$routes->connect('*', ['controller' => 'Pages', 'action' => 'display']);
-
-    /**
-     * Here, we are connecting '/' (base path) to a controller called 'Pages',
-     * its action called 'display', and we pass a param to select the view file
-     * to use (in this case, src/Template/Pages/home.ctp)...
-     */
-    // $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-
-    /**
-     * ...and connect the rest of 'Pages' controller's URLs.
-     */
-    // $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-
-    /**
-     * Connect catchall routes for all controllers.
-     *
-     * Using the argument `InflectedRoute`, the `fallbacks` method is a shortcut for
-     *    `$routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);`
-     *    `$routes->connect('/:controller/:action/*', [], ['routeClass' => 'InflectedRoute']);`
-     *
-     * Any route class can be used with this method, such as:
-     * - DashedRoute
-     * - InflectedRoute
-     * - Route
-     * - Or your own route class
-     *
-     * You can remove these routes once you've connected the
-     * routes you want in your application.
-     */
-	// $routes->fallbacks('InflectedRoute');
-});
-
 Router::scope('/api', function($routes) {
 	$routes->extensions(['json','xml']);
 	$routes->resources('Cycles', function($routes) {
 		$routes->resources('Tutorials');
 	});
-	$routes->resources('Students', function($routes) {
+	$routes->resources('Students', [
+		'map' => [
+			'import' => [
+				'action' => 'import',
+				'method' => 'POST',
+			]
+		]
+	], function($routes) {
 		$routes->resources('Tutorials');
 	});
 	$routes->resources('Users');
+
+});
+
+Router::scope('/', function ($routes) {
+
+	$routes->connect('*', ['controller' => 'Pages', 'action' => 'display']);
+
 });
 
 /**

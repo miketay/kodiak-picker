@@ -1,5 +1,5 @@
 (function() {
 	'use strict';
 
-	angular.module('Page', ['ngMaterial']);
+	angular.module('Page', ['ngMaterial', 'ngMessages', 'Student']);
 })();

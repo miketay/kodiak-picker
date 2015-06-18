@@ -111,5 +111,14 @@ class StudentsController extends AppController
 			'message' => $message,
 			'_serialize' => ['message']
 		]);
-    }
+	}
+
+	public function import()
+	{
+		// get file and parse it into db
+		$this->set([
+			'message' => "Success",
+			'_serialize' => ['message']
+		]);
+	}
 }
