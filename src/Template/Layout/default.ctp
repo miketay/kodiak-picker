@@ -52,6 +52,21 @@ FULL_BASE_URL = '<?= $this->request->webroot; ?>';
 			</md-list>
 		</md-content>
 	</md-sidenav>
+	<div layout="column" tabIndex="-1" role="main" flex>
+		<md-toolbar>
+			<div class="md-toolbar-tools" tabIndex="-1">
+				<md-button class="menu" hide-gt-sm ng-click="toggleSidenav('left')" aria-label="Show left side nav">
+					<md-icon md-svg-icon="menu"></md-icon>
+				</md-button>
+				<div layout="row" flex class="fill-height">
+					<h2 class="md-toolbar-item md-breadcrumb">
+						<span>{{page.title()}}</span>
+					</h2>
+				</div>
+			</div>
+		</md-toolbar>
+		<md-content ng-view md-scroll-y flex class="md-padding"></md-content>
+	</div>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic">
 
 	<script src="/bower_components/angular/angular.min.js"></script>
