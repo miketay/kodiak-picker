@@ -1,6 +1,6 @@
 <div layout="row">
 	<form name="uploadForm">
-		<strong>Upload student list:</strong>
+		<h3>Upload student list:</h3>
 		<md-input-container>
 			<button class="md-button md-primary md-raised">
 				Choose File
@@ -8,7 +8,10 @@
 			</button>
 			<div ng-messages="uploadForm.files.$error">
 				<div ng-message="fileType">File type must be .text</div>
+				<div ng-message="serverError">{{serverError}}</div>
 			</div>
+			<p ng-show="importing"><strong>Importing...</strong></p>
+			<md-progress-linear ng-show="importing" md-mode="indeterminate"></md-progress-linear>
 		</md-input-container>
 	</form>
 </div>
