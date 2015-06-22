@@ -6,7 +6,7 @@
 			var navigationItems = [
 				[ // student
 					{
-						"icon": "",
+						"icon": "home",
 						"text": "Home",
 						"url": "/"
 					},

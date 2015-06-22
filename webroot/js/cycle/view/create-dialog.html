@@ -1,0 +1,32 @@
+<md-dialog aria-label="Create New Cycle">
+	<form ng-submit="submit()" name="create" novalidate>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>Create New Cycle</h2>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<md-icon md-svg-icon="close" aria-label="Close Dialog"></md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<md-input-container>
+				<label for="name">Cycle Name</label>
+				<input id="name" name="name" required ng-model="cycle.name" type="text" />
+				<div ng-messages="create.name.$error">
+					<div ng-message="required">This is required</div>
+				</div>
+			</md-input-container>
+			<md-select placeholder="Status" ng-model="cycle.status">
+				<md-option value="Pre-registration">Pre-registration</md-option>
+				<md-option value="Open">Open</md-option>
+				<md-option value="Active">Active</md-option>
+				<md-option value="Completed">Completed</md-option>
+			</md-select>
+		</md-dialog-content>
+		<div class="md-actions" layout="row">
+			<md-button ng-click="submit()" class="md-raised md-primary">Create</md-button>
+			<md-button ng-click="cancel()" class="md-raised">Cancel</md-button>
+		</div>
+	</form>
+</md-dialog>
+

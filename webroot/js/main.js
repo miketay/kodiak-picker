@@ -16,8 +16,11 @@
 
 			$mdIconProvider
 				.icon("menu",	"/assets/svg/menu.svg",	24)
-				.icon("plus",	"/assets/svg/plus.svg",	512)
-				.icon("share",	"/assets/svg/share.svg",24);
+				.icon("home",	"/assets/svg/home.svg", 24)
+				.icon("add",	"/assets/svg/add.svg",	24)
+				.icon("share",	"/assets/svg/share.svg",24)
+				.icon("close",	"/assets/svg/close.svg",24)
+				.icon("create",	"/assets/svg/create.svg",24);
 			
 			$resourceProvider.defaults.stripTrailingSlashes = false;
 		}])
