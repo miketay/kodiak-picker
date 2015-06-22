@@ -13,6 +13,11 @@
 					templateUrl: "/js/student/view/import.html",
 					controller: "StudentImportController",
 					requiredLogin: 0 // TODO: change when authentication is implemented
+				},
+				"/cycles": {
+					templateUrl: "/js/cycle/view/index.html",
+					controller: "CycleListController",
+					requiredLogin: 0 // TODO: change when authentication is implemented
 				}
 			};
 

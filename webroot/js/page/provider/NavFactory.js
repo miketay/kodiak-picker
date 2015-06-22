@@ -14,6 +14,11 @@
 						"icon": "",
 						"text": "Import Students",
 						"url": "/import"
+					},
+					{
+						"icon": "",
+						"text": "Cycles",
+						"url": "/cycles"
 					}
 				],
                 [ // admin

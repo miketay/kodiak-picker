@@ -26,7 +26,6 @@ class CyclesController extends AppController
 	{
 		$cycles = $this->Cycles->find('all');
         $this->set('cycles', $cycles);
-        $this->set('_serialize', ['cycles']);
     }
 
     /**
@@ -54,16 +53,13 @@ class CyclesController extends AppController
     {
         $cycle = $this->Cycles->newEntity();
 		if ($this->request->is('post')) {
-			$message = __("Cycle has been saved");
             $cycle = $this->Cycles->patchEntity($cycle, $this->request->data);
             if (!$this->Cycles->save($cycle)) {
-				$message = __("Cycle could not be saved");
+				throw new \Cake\Network\Exception\BadRequestException();
             }
         }
 		$this->set([
-			'message' => $message,
 			'cycle' => $cycle,
-			'_serialize' => ['message', 'cycle']
 		]);
     }
 
@@ -81,15 +77,12 @@ class CyclesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$cycle = $this->Cycles->patchEntity($cycle, $this->request->data);
-			$message = __("Cycle has been saved");
             if (!$this->Cycles->save($cycle)) {
-				$message = __("Cycle could not be saved");
+				throw new \Cake\Network\Exception\BadRequestException();
             }
 		}
 		$this->set([
-			'message' => $message,
 			'cycle' => $cycle,
-			'_serialize' => ['message', 'cycle']
 		]);
     }
 
