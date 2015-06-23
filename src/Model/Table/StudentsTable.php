@@ -27,9 +27,7 @@ class StudentsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
         $this->belongsToMany('Tutorials', [
-            'foreignKey' => 'student_id',
-            'targetForeignKey' => 'tutorial_id',
-            'joinTable' => 'students_tutorials'
+			'through' => 'StudentsTutorials'
         ]);
     }
 

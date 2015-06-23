@@ -31,9 +31,7 @@ class TutorialsTable extends Table
             'foreignKey' => 'cycle_id'
         ]);
         $this->belongsToMany('Students', [
-            'foreignKey' => 'tutorial_id',
-            'targetForeignKey' => 'student_id',
-            'joinTable' => 'students_tutorials'
+			'through' => 'StudentsTutorials'
         ]);
     }
 
