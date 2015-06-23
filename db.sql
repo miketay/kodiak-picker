@@ -27,6 +27,7 @@ CREATE TABLE tutorials (
 CREATE TABLE students_tutorials (
 	id          INTEGER primary key,
 	student_id  INTEGER,
-	tutorial_id INTEGER
+	tutorial_id INTEGER,
+	locked		INTEGER
 );
 COMMIT;
