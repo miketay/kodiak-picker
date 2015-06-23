@@ -18,7 +18,12 @@
 					templateUrl: "/js/cycle/view/index.html",
 					controller: "CycleListController",
 					requiredLogin: 0 // TODO: change when authentication is implemented
-				}
+				},
+				"/cycles/:id": {
+					templateUrl: "/js/cycle/view/detail.html",
+					controller: "CycleDetailController",
+					requiredLogin: 0 // TODO: ditto
+				},
 			};
 
 			return {

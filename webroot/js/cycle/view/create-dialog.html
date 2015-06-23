@@ -1,8 +1,9 @@
-<md-dialog aria-label="Create New Cycle">
+<md-dialog aria-label="{{title()}}">
 	<form ng-submit="submit()" name="create" novalidate>
 		<md-toolbar>
 			<div class="md-toolbar-tools">
-				<h2>Create New Cycle</h2>
+				<h2>{{title()}}</h2>
+				<span flex></span>
 				<md-button class="md-icon-button" ng-click="cancel()">
 					<md-icon md-svg-icon="close" aria-label="Close Dialog"></md-icon>
 				</md-button>
@@ -24,7 +25,8 @@
 			</md-select>
 		</md-dialog-content>
 		<div class="md-actions" layout="row">
-			<md-button ng-click="submit()" class="md-raised md-primary">Create</md-button>
+			<md-button ng-click="submit()" class="md-raised md-primary">{{button()}}</md-button>
+			<md-button ng-if="edit" ng-click="delete()" class="md-raised md-warn">Delete</md-button>
 			<md-button ng-click="cancel()" class="md-raised">Cancel</md-button>
 		</div>
 	</form>

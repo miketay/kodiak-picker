@@ -41,7 +41,6 @@ class CyclesController extends AppController
             'contain' => ['Tutorials']
         ]);
         $this->set('cycle', $cycle);
-        $this->set('_serialize', ['cycle']);
     }
 
     /**
@@ -97,13 +96,8 @@ class CyclesController extends AppController
     {
         $this->request->allowMethod(['delete']);
 		$cycle = $this->Cycles->get($id);
-		$message = __("Cycle has been deleted");
         if (!$this->Cycles->delete($cycle)) {
-			$message = __("Cycle could not be saved");
+			throw new \Cake\Network\Exception\BadRequestException();
         }
-		$this->set([
-			'message' => $message,
-			'_serialize' => ['message']
-		]);
     }
 }

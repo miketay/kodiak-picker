@@ -1,16 +1,11 @@
 <div layout="column">
 	<md-list>
-		<md-list-item ng-repeat="cycle in cycles" class="md-2-line">
-			<md-list-item-text>
+		<md-list-item class="md-2-line" ng-repeat="cycle in cycles" ng-click="navigate(cycle.id)">
+			<div class="md-list-item-text">
 				<h3>{{cycle.name}}</h3>
 				<p>{{cycle.status}}</p>
-			</md-list-item-text>
-			<md-radio-group class="md-secondary" ng-model="cycle.status" layout="row" ng-change="cycle.$update()">
-				<md-radio-button value="Pre-registration" layout="column" layout-align="space-around center">Pre-registration</md-radio-button>
-				<md-radio-button value="Open" layout="column" layout-align="space-around center">Open</md-radio-button>
-				<md-radio-button value="Active" layout="column" layout-align="space-around center">Active</md-radio-button>
-				<md-radio-button value="Completed" layout="column" layout-align="space-around center">Completed</md-radio-button>
-			</md-radio-group>
+			</div>
+			<md-icon class="md-secondary" ng-click="edit(cycle.id, $event)" aria-label="Quick Edit" md-svg-icon="create"><md-tooltip>Quick Edit</md-tooltip></md-icon>
 		</md-list-item>
 	</md-list>
 </div>
