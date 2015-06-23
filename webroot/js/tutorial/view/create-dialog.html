@@ -1,0 +1,50 @@
+<md-dialog aria-label="{{title()}}">
+	<form ng-submit="submit()" name="create" novalidate>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>{{title()}}</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<md-icon md-svg-icon="close" aria-label="Close Dialog"></md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<md-input-container>
+				<label for="name">Tutorial Name</label>
+				<input id="name" name="name" required ng-model="tutorial.name" type="text" />
+				<div ng-messages="create.name.$error">
+					<div ng-message="required">This is required</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label for="teacher">Teacher's Name</label>
+				<input id="teacher" name="teacher" required ng-model="tutorial.teacher_name" type="text" />
+				<div ng-messages="create.teacher.$error">
+					<div ng-message="required">This is required</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label for="room">Room Number</label>
+				<input id="room" name="room" required ng-model="tutorial.room_number" type="text" />
+				<div ng-messages="create.room.$error">
+					<div ng-message="required">This is required</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label for="max">Max Number of Students</label>
+				<input id="max" name="max" required ng-model="tutorial.max_students" type="number" min="1" />
+				<div ng-messages="create.max.$error">
+					<div ng-message="required">This is required</div>
+					<div ng-message="min">1 or more is only logical</div>
+				</div>
+			</md-input-container>
+		</md-dialog-content>
+		<div class="md-actions" layout="row">
+			<md-button ng-click="submit()" class="md-raised md-primary">{{button()}}</md-button>
+			<md-button ng-if="edit" ng-click="delete()" class="md-raised md-warn">Delete</md-button>
+			<md-button ng-click="cancel()" class="md-raised">Cancel</md-button>
+		</div>
+	</form>
+</md-dialog>
+

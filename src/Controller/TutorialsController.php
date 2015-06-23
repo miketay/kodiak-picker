@@ -33,7 +33,6 @@ class TutorialsController extends AppController
 		$tutorials = $this->Tutorials->find('all', ['conditions' => $conditions]);
 		$this->set([
 			'tutorials' => $tutorials,
-			'_serialize' => ['tutorials']
 		]);
     }
 
@@ -57,7 +56,6 @@ class TutorialsController extends AppController
             'contain' => ['Cycles', 'Students']
         ]);
         $this->set('tutorial', $tutorial);
-        $this->set('_serialize', ['tutorial']);
     }
 
     /**
@@ -69,18 +67,13 @@ class TutorialsController extends AppController
     {
 		$tutorial = $this->Tutorials->newEntity();
 		if ($this->request->is('post')) {
-			$message = "";
 			$this->request->data['cycle_id'] = $this->request->params['cycle_id'];
             $tutorial = $this->Tutorials->patchEntity($tutorial, $this->request->data);
-            if ($this->Tutorials->save($tutorial)) {
-				$message = __('Tutorial saved');
-            } else {
-				$message = __('Tutorial could not be saved');
-			}
+            if (!$this->Tutorials->save($tutorial)) {
+				throw new \Cake\Network\Exception\BadRequestException();
+            }
 			$this->set([
-				'message' => $message,
 				'tutorial' => $tutorial,
-				'_serialize' => ['message', 'tutorial']
 			]);
         }
     }
@@ -99,15 +92,12 @@ class TutorialsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$tutorial = $this->Tutorials->patchEntity($tutorial, $this->request->data);
-			$message = __("Tutorial saved");
             if (!$this->Tutorials->save($tutorial)) {
-				$message = __("Tutorial could not be saved");
+				throw new \Cake\Network\Exception\BadRequestException();
 			}
 		}
 		$this->set([
-			'message' => $message,
 			'tutorial' => $tutorial,
-			'_serialize' => ['message', 'tutorial']
 		]);
     }
 
@@ -122,13 +112,11 @@ class TutorialsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
 		$tutorial = $this->Tutorials->get($id);
-		$message = __("Tutorial deleted");
         if (!$this->Tutorials->delete($tutorial)) {
-			$message = __("Tutorial could not be deleted");
+			throw new \Cake\Network\Exception\BadRequestException();
 		}
 		$this->set([
 			'message' => $message,
-			'_serialize' => ['message']
 		]);
 	}
 }

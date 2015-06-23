@@ -1,25 +1,27 @@
 (function() {
 	'use strict';
 
-	angular.module('Cycle')
-		.controller('CycleCreateController', ['$scope', '$mdDialog', '$document', 'cycle', function CycleCreateController($scope, $mdDialog, $document, cycle) {
+	angular.module('Tutorial')
+		.controller('TutorialCreateController', ['$scope', '$mdDialog', '$document', 'tutorial', function TutorialCreateController($scope, $mdDialog, $document, tutorial) {
 
 			$scope.edit = false; 
-			if (cycle !== false) {
-				$scope.cycle = cycle;
+			if (tutorial !== false) {
+				$scope.tutorial = tutorial;
 				$scope.edit = true;
 			} else {
-				$scope.cycle = {
+				$scope.tutorial = {
 					name: "",
-					status: "Pre-registration"
+					teacher_name: "",
+					room_number: 0,
+					max_students: 10
 				};
 			}
 
 			$scope.title = function() {
 				if ($scope.edit) {
-					return "Edit "+$scope.cycle.name;
+					return "Edit "+$scope.tutorial.name;
 				}
-				return "Create New Cycle";
+				return "Create New Tutorial";
 			};
 
 			$scope.button = function() {
@@ -31,7 +33,7 @@
 
 			$scope.submit = function() {
 				if (!$scope.create.$invalid) {
-					$mdDialog.hide($scope.cycle);
+					$mdDialog.hide($scope.tutorial);
 				} else {
 					$document[0].create.name.focus();
 				}
