@@ -39,14 +39,17 @@ class PagesController extends AppController
     {
         $path = func_get_args();
 
-        $page = $subpage = null;
+		$page = $subpage = null;
 
         if (!empty($path[0])) {
             $page = $path[0];
         }
         if (!empty($path[1])) {
             $subpage = $path[1];
-        }
+		}
+		if ($page == 'api') {
+			throw new NotFoundException();
+		}
 		$this->set(compact('page', 'subpage'));
 
 		$this->render('/Layout/default');
