@@ -24,6 +24,11 @@
 					controller: "CycleDetailController",
 					requiredLogin: 0 // TODO: ditto
 				},
+				"/cycles/:cycle_id/tutorials/:tutorial_id": {
+					templateUrl: "/js/tutorial/view/detail.html",
+					controller: "TutorialDetailController",
+					requiredLogin: 0 // TODO: ditto
+				}
 			};
 
 			return {

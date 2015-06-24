@@ -53,8 +53,9 @@ Router::scope('/api', function($routes) {
 				'method' => 'POST',
 			]
 		]
-	], function($routes) {
-		$routes->resources('Tutorials');
+	]);
+	$routes->resources('Tutorials', function($routes) {
+		$routes->resources('Students');
 	});
 	$routes->resources('Users');
 

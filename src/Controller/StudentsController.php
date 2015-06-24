@@ -24,9 +24,16 @@ class StudentsController extends AppController
      * @return void
      */
     public function index()
-    {
-        $this->set('students', $this->Students->find('all'));
-        $this->set('_serialize', ['students']);
+	{
+		$students = $this->Students->find('all');
+		if (isset($this->request->params['tutorial_id'])) {
+			$students->matching('Tutorials', function($q) {
+				return $q->where(['Tutorials.id' => $this->request->params['tutorial_id']]);
+			});
+		}
+		$this->set([
+			'students' => $students
+		]);
     }
 
     /**
@@ -42,7 +49,6 @@ class StudentsController extends AppController
             'contain' => ['Tutorials']
         ]);
         $this->set('student', $student);
-        $this->set('_serialize', ['student']);
     }
 
     /**
@@ -54,15 +60,12 @@ class StudentsController extends AppController
     {
 		$student = $this->Students->newEntity();
         if ($this->request->is('post')) {
-			$message = __("Student added");
             $student = $this->Students->patchEntity($student, $this->request->data);
             if (!$this->Students->save($student)) {
-				$message = __("Student could not be added");
+				throw new \Cake\Network\Exception\BadRequestException();
             }
 			$this->set([
-				'message' => $message,
 				'student' => $student,
-				'_serialize' => ['message','student']
 			]);
         }
     }
@@ -81,14 +84,11 @@ class StudentsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$student = $this->Students->patchEntity($student, $this->request->data);
-			$message = __("Student saved");
             if (!$this->Students->save($student)) {
-				$message = __("Student could not be saved");
+				throw new \Cake\Network\Exception\BadRequestException();
 			}
 			$this->set([
-				'message' => $message,
 				'student' => $student,
-				'_serialize' => ['message', 'student']
 			]);
         }
     }
@@ -104,14 +104,9 @@ class StudentsController extends AppController
     {
         $this->request->allowMethod(['delete']);
 		$student = $this->Students->get($id);
-		$message = __("Student Deleted");
         if (!$this->Students->delete($student)) {
-			$message = __("Student could not be deleted");
+			throw new \Cake\Network\Exception\BadRequestException();
         }
-		$this->set([
-			'message' => $message,
-			'_serialize' => ['message']
-		]);
 	}
 
 	public function import()

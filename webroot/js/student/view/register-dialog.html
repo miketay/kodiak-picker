@@ -1,0 +1,39 @@
+<md-dialog aria-label="Register Students">
+	<form ng-submit="submit()" name="register" novalidate>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>Register Student</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<md-icon md-svg-icon="close" aria-label="Close Dialog"></md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<md-chips ng-model="selStudents" md-autocomplete-snap md-require-match>
+				<md-autocomplete
+					md-selected-item="selected"
+					md-selected-item-change="null"
+					md-search-text="searchText"
+					md-search-text-change="null"
+					md-items="student in querySearch(searchText)"
+					md-item-text="student.lastname">
+					<md-item-template>
+						<span md-highlight-text="searchText" md-highlight-flags="^i">{{student.last_name}}, {{student.first_name}}</span>
+					</md-item-template>
+					<md-not-found>
+						No students found for "{{searchText}}".
+					</md-not-found>
+				</md-autocomplete>
+				<md-chip-template>
+					{{$chip.last_name}}, {{$chip.first_name}}
+				</md-chip-template>
+			</md-chips>
+		</md-dialog-content>
+		<div class="md-actions" layout="row">
+			<md-button ng-click="submit()" class="md-raised md-primary">Register Students</md-button>
+			<md-button ng-click="cancel()" class="md-raised">Cancel</md-button>
+		</div>
+	</form>
+</md-dialog>
+

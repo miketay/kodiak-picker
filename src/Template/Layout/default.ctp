@@ -12,7 +12,7 @@
  * @since         0.10.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
+$debug = \Cake\Core\Configure::read('debug');
 ?>
 <!DOCTYPE html>
 <html lang="en" ng-app="kodiak" ng-controller="MainController">
@@ -25,7 +25,7 @@
     <?= $this->fetch('meta') ?>
 	<base href="<?= $this->request->webroot; ?>">
 
-	<link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css" />
+	<link rel="stylesheet" href="/bower_components/angular-material/angular-material.<?= $debug ? '' : 'min.' ?>css" />
 	<link rel="stylesheet" href="/css/app.css" />
 <script>
 FULL_BASE_URL = '<?= $this->request->webroot; ?>';
@@ -69,13 +69,13 @@ FULL_BASE_URL = '<?= $this->request->webroot; ?>';
 	</div>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic">
 
-	<script src="/bower_components/angular/angular.min.js"></script>
-	<script src="/bower_components/angular-route/angular-route.min.js"></script>
-	<script src="/bower_components/angular-resource/angular-resource.min.js"></script>
-	<script src="/bower_components/angular-messages/angular-messages.min.js"></script>
-	<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
-	<script src="/bower_components/angular-aria/angular-aria.min.js"></script>
-	<script src="/bower_components/angular-material/angular-material.min.js"></script>
+	<script src="/bower_components/angular/angular.<?= $debug ? '' : 'min.' ?>js"></script>
+	<script src="/bower_components/angular-route/angular-route.<?= $debug ? '' : 'min.' ?>js"></script>
+	<script src="/bower_components/angular-resource/angular-resource.<?= $debug ? '' : 'min.' ?>js"></script>
+	<script src="/bower_components/angular-messages/angular-messages.<?= $debug ? '' : 'min.' ?>js"></script>
+	<script src="/bower_components/angular-animate/angular-animate.<?= $debug ? '' : 'min.' ?>js"></script>
+	<script src="/bower_components/angular-aria/angular-aria.<?= $debug ? '' : 'min.' ?>js"></script>
+	<script src="/bower_components/angular-material/angular-material.<?= $debug ? '' : 'min.' ?>js"></script>
 
 	<!-- add modules here -->
 	<script src="/js/config/Config.js"></script>
@@ -95,8 +95,8 @@ FULL_BASE_URL = '<?= $this->request->webroot; ?>';
 
 	<script src="/js/tutorial/Tutorial.js"></script>
 	<script src="/js/tutorial/resource/TutorialCycleResource.js"></script>
-	<script src="/js/tutorial/resource/TutorialStudentResource.js"></script>
 	<script src="/js/tutorial/controller/TutorialCreateController.js"></script>
+	<script src="/js/tutorial/controller/TutorialDetailController.js"></script>
 
 	<script src="/js/cycle/Cycle.js"></script>
 	<script src="/js/cycle/resource/CycleResource.js"></script>
@@ -105,9 +105,11 @@ FULL_BASE_URL = '<?= $this->request->webroot; ?>';
 	<script src="/js/cycle/controller/CycleDetailController.js"></script>
 
 	<script src="/js/student/Student.js"></script>
-	<script src="/js/student/controller/StudentImportController.js"></script>
 	<script src="/js/student/provider/StudentFactory.js"></script>
 	<script src="/js/student/resource/StudentResource.js"></script>
+	<script src="/js/student/resource/StudentTutorialResource.js"></script>
+	<script src="/js/student/controller/StudentImportController.js"></script>
+	<script src="/js/student/controller/StudentRegisterController.js"></script>
 
 	<script src="/js/main.js"></script>
 </body>

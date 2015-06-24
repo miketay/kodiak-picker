@@ -27,8 +27,6 @@ class TutorialsController extends AppController
 		$conditions = [];
 		if (isset($this->request->params['cycle_id'])) {
 			$conditions['cycle_id'] = $this->request->params['cycle_id'];
-		} elseif (isset($this->request->params['student_id'])) {
-			$conditions['student_id'] = $this->request->params['student_id'];
 		}
 		$tutorials = $this->Tutorials->find('all', ['conditions' => $conditions]);
 		$this->set([
@@ -70,7 +68,7 @@ class TutorialsController extends AppController
 			$this->request->data['cycle_id'] = $this->request->params['cycle_id'];
             $tutorial = $this->Tutorials->patchEntity($tutorial, $this->request->data);
             if (!$this->Tutorials->save($tutorial)) {
-				throw new \Cake\Network\Exception\BadRequestException();
+				throw new \Cake\Network\Exception\BadRequestException($tutorial->errors()[0]);
             }
 			$this->set([
 				'tutorial' => $tutorial,
@@ -115,9 +113,6 @@ class TutorialsController extends AppController
         if (!$this->Tutorials->delete($tutorial)) {
 			throw new \Cake\Network\Exception\BadRequestException();
 		}
-		$this->set([
-			'message' => $message,
-		]);
 	}
 }
 
