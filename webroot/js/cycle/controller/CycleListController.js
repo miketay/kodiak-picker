@@ -28,8 +28,9 @@
 					// create new cycle
 					var newCycle = new CycleResource();
 					angular.extend(newCycle, data);
-					newCycle.$save();
-					$scope.cycles.push(newCycle);
+					newCycle.$save(function() {
+						$scope.cycles.push(newCycle);
+					});
 				});
 			};
 

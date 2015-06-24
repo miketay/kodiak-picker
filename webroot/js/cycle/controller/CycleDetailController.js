@@ -35,8 +35,9 @@
 					var newTutorial = new TutorialCycleResource();
 					angular.extend(newTutorial, data);
 					newTutorial.cycle_id = $routeParams.id;
-					newTutorial.$save();
-					$scope.tutorials.push(newTutorial);
+					newTutorial.$save(function() {
+						$scope.tutorials.push(newTutorial);
+					});
 				});
 			};
 
