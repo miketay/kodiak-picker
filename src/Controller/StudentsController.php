@@ -98,7 +98,10 @@ class StudentsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['delete']);
+		$this->request->allowMethod(['delete']);
+		if (isset($this->request->params['tutorial_id'])) {
+			return $this->unregister($id);
+		}
 		$student = $this->Students->get($id);
         if (!$this->Students->delete($student)) {
 			throw new \Cake\Network\Exception\BadRequestException();
@@ -116,7 +119,7 @@ class StudentsController extends AppController
 		$file = substr($file, $listStart);
 		$file = explode("\r\n", $file);
 
-		$this->Students->connection()->transactional(function() use ($StudentTable, $file) {
+		$this->Students->connection()->transactional(function() use ($file) {
 			$rows = count($file);
 			$headers = explode("\t", $file[0]);
 			for ($i = 1; $i<$rows; $i++) {
@@ -132,10 +135,10 @@ class StudentsController extends AppController
 				}
 				// cake 3 doesn't have a saveAll that checks for existing records
 				// so we have to do it indiviually
-				$student = $StudentTable->newEntity($student, [
+				$student = $this->Students->newEntity($student, [
 					'accessibleFields' => ['id' => true]
 				]);
-				if (!$StudentTable->save($student)) {
+				if (!$this->Students->save($student)) {
 					throw new \Cake\Network\Exception\InternalErrorException("Couldn't save student {$student['id']}");
 				}
 			}
@@ -162,9 +165,10 @@ class StudentsController extends AppController
 				// delete the current one if it's not locked
 				$locked = $regTutorial['_joinData']['locked'];
 				if ($lock || !$locked) {
+					die();
 					$this->Students->Tutorials->unlink($student, [$regTutorial]);
 				} else {
-					throw new \Cake\Network\Excpetion\ForbiddenException();
+					throw new \Cake\Network\Exception\ForbiddenException("locked");
 				}
 				break;
 			}
@@ -178,8 +182,18 @@ class StudentsController extends AppController
 		}
 
 		$this->set([
-			'student' => $this->Students->get($id, ['contain'=>['Tutorials']])
+			'student' => $student
 		]);
+	}
+
+	public function unregister($id = null) {
+		$student = $this->Students->get($id);
+		$tutorial = $this->Students->Tutorials->get($this->request->params['tutorial_id']);
+		try {
+			$this->Students->Tutorials->unlink($student, [$tutorial]);
+		} catch (Exception $e) {
+			throw new \Cake\Network\Excpetion\BadRequestException($e->getMessage());
+		}
 	}
 
 }

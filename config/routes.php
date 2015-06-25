@@ -60,7 +60,7 @@ Router::scope('/api', function($routes) {
 				':id' => [
 					'action' => 'register',
 					'method' => 'POST',
-				]
+				],
 			]
 		]);
 	});
