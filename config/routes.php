@@ -55,7 +55,14 @@ Router::scope('/api', function($routes) {
 		]
 	]);
 	$routes->resources('Tutorials', function($routes) {
-		$routes->resources('Students');
+		$routes->resources('Students', [
+			'map' => [
+				':id' => [
+					'action' => 'register',
+					'method' => 'POST',
+				]
+			]
+		]);
 	});
 	$routes->resources('Users');
 

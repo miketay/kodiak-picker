@@ -57,17 +57,16 @@ class StudentsController extends AppController
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add()
-    {
+	{
+		$this->request->allowMethod(['post']);
 		$student = $this->Students->newEntity();
-        if ($this->request->is('post')) {
-            $student = $this->Students->patchEntity($student, $this->request->data);
-            if (!$this->Students->save($student)) {
-				throw new \Cake\Network\Exception\BadRequestException();
-            }
-			$this->set([
-				'student' => $student,
-			]);
-        }
+		$student = $this->Students->patchEntity($student, $this->request->data);
+		if (!$this->Students->save($student)) {
+			throw new \Cake\Network\Exception\BadRequestException();
+		}
+		$this->set([
+			'student' => $student,
+		]);
     }
 
     /**
@@ -79,18 +78,15 @@ class StudentsController extends AppController
      */
     public function edit($id = null)
     {
-        $student = $this->Students->get($id, [
-            'contain' => ['Tutorials']
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-			$student = $this->Students->patchEntity($student, $this->request->data);
-            if (!$this->Students->save($student)) {
-				throw new \Cake\Network\Exception\BadRequestException();
-			}
-			$this->set([
-				'student' => $student,
-			]);
-        }
+        $this->request->allowMethod(['put']);
+		$student = $this->Students->get($id);
+		$student = $this->Students->patchEntity($student, $this->request->data);
+		if (!$this->Students->save($student)) {
+			throw new \Cake\Network\Exception\BadRequestException();
+		}
+		$this->set([
+			'student' => $student,
+		]);
     }
 
     /**
@@ -120,8 +116,7 @@ class StudentsController extends AppController
 		$file = substr($file, $listStart);
 		$file = explode("\r\n", $file);
 
-		$StudentTable = TableRegistry::get('Students');
-		$StudentTable->connection()->transactional(function() use ($StudentTable, $file) {
+		$this->Students->connection()->transactional(function() use ($StudentTable, $file) {
 			$rows = count($file);
 			$headers = explode("\t", $file[0]);
 			for ($i = 1; $i<$rows; $i++) {
@@ -151,4 +146,40 @@ class StudentsController extends AppController
 			'_serialize' => ['message']
 		]);
 	}
+
+	public function register($id = null) {
+		$this->request->allowMethod(['post']);
+		$student = $this->Students->get($id, [
+			'contain' => ['Tutorials']
+		]);
+		$lock = !!$this->request->data('lock');
+		$tutorial_id = $this->request->params['tutorial_id'];
+		$tutorial = $this->Students->Tutorials->get($tutorial_id);
+		// see if they are already registered for a tutorial in this cycle
+		// delete it if they are
+		foreach ($student['tutorials'] as $regTutorial) {
+			if ($regTutorial['cycle_id'] == $tutorial['cycle_id']) {
+				// delete the current one if it's not locked
+				$locked = $regTutorial['_joinData']['locked'];
+				if ($lock || !$locked) {
+					$this->Students->Tutorials->unlink($student, [$regTutorial]);
+				} else {
+					throw new \Cake\Network\Excpetion\ForbiddenException();
+				}
+				break;
+			}
+		}
+		// create a new one
+		$tutorial->_joinData = $this->Students->Tutorials->StudentsTutorials->newEntity();
+		$tutorial->_joinData->locked = $lock;
+
+		if (!$this->Students->Tutorials->link($student, [$tutorial])) {
+			throw new \Cake\Network\Exception\BadRequestException();
+		}
+
+		$this->set([
+			'student' => $this->Students->get($id, ['contain'=>['Tutorials']])
+		]);
+	}
+
 }
