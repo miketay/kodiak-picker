@@ -11,10 +11,10 @@
 			md-search-text-change="null"
 			md-floating-label="Enter Name:"
 			md-input-name="name"
-			md-items="student in querySearch(searchText)"
+		    md-items="student in querySearch(searchText)"
 			md-item-text="student.first_name+' '+student.last_name">
 			<md-item-template>
-				<span md-highlight-text="searchText" md-highlight-flags="^i">{{student.last_name}}, {{student.first_name}}</span>
+				<span md-highlight-text="searchText" md-highlight-flags="^i">{{student.first_name}} {{student.last_name}}</span>
 			</md-item-template>
 			<md-not-found>
 				No student found for "{{searchText}}".

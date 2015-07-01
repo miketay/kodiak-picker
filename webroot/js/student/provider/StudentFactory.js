@@ -45,6 +45,9 @@
 						defer.reject(data);
 					});
 					return defer.promise;
+				},
+				type: function() {
+					return currentUser.type ? currentUser.type : "none";
 				}
 			};
 		}]);

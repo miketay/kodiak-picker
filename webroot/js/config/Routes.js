@@ -7,27 +7,37 @@
 				"/": {
 					templateUrl: "/js/page/view/landing.html",
 					controller: "LandingController",
-					requiredLogin: 0
+					requiredLogin: "none"
 				},
-				"/import": {
+				"/tutorials": {
+					templateUrl: "/js/tutorials/view/index.html",
+					controller: "TutorialListController",
+					requiredLogin: "student"
+				},
+				"/logout": {
+					templateUrl: "/js/page/view/landing.html",
+					controller: "LogoutController",
+					requiredLogin: "student"
+				},
+				"/admin/import": {
 					templateUrl: "/js/student/view/import.html",
 					controller: "StudentImportController",
-					requiredLogin: 0 // TODO: change when authentication is implemented
+					requiredLogin: "admin" 
 				},
-				"/cycles": {
+				"/admin/cycles": {
 					templateUrl: "/js/cycle/view/index.html",
 					controller: "CycleListController",
-					requiredLogin: 0 // TODO: change when authentication is implemented
+					requiredLogin: "admin" 
 				},
-				"/cycles/:id": {
+				"/admin/cycles/:id": {
 					templateUrl: "/js/cycle/view/detail.html",
 					controller: "CycleDetailController",
-					requiredLogin: 0 // TODO: ditto
+					requiredLogin: "admin" 
 				},
-				"/cycles/:cycle_id/tutorials/:tutorial_id": {
+				"/admin/cycles/:cycle_id/tutorials/:tutorial_id": {
 					templateUrl: "/js/tutorial/view/detail.html",
 					controller: "TutorialDetailController",
-					requiredLogin: 0 // TODO: ditto
+					requiredLogin: "admin" 
 				}
 			};
 

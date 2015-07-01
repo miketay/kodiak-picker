@@ -2,36 +2,40 @@
 	'use strict';
 
 	angular.module('Page')
-		.factory('Nav', ['$location', 'Auth', function NavFactory($location, Auth) {
-			var navigationItems = [
-				[ // student
-					{
-						"icon": "home",
-						"text": "Home",
-						"url": "/"
-					},
-					{
-						"icon": "",
-						"text": "Import Students",
-						"url": "/import"
-					},
-					{
-						"icon": "",
-						"text": "Cycles",
-						"url": "/cycles"
-					}
-				],
-                [ // admin
-                    {
-                        "icon": "",
-                        "text": "Admin",
-                        "url": "/admin"
-                    }
-                ]
-			];
+		.factory('Nav', ['$location', 'StudentFactory', function NavFactory($location, StudentFactory) {
+			var navigationItems = {
+				"none": [
+				{
+					"icon": "home",
+					"text": "Home",
+					"url": "/"
+				}],
+				"student":[
+				{
+					"icon": "home",
+					"text": "Home",
+					"url": "/"
+				}],
+                "admin":[
+				{
+					"icon": "",
+					"text": "Admin",
+					"url": "/admin"
+				},
+				{
+					"icon": "",
+					"text": "Import Students",
+					"url": "/import"
+				},
+				{
+					"icon": "",
+					"text": "Cycles",
+					"url": "/cycles"
+				}]
+			};
 
 			var which = function() {
-				return Auth.userType();
+				return StudentFactory.type();
 			};
 
 			var nav = {

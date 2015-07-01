@@ -202,6 +202,7 @@ class StudentsController extends AppController
 
 		// then attempt to login a student
 		$student = $this->request->data('student');
+		unset($student['full_name']);
 		$password = $this->request->data('password');
 		$realStudent = $this->Students->get($password);
 		// okay if we made it this far it's a real student

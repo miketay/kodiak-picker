@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('kodiak', ['ngMaterial','ngRoute','ngResource','ngMessages','Config','Auth','Page'])
+	angular.module('kodiak', ['ngMaterial','ngRoute','ngResource','ngMessages','Config','Page'])
 		.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locationProvider', '$resourceProvider', 'RoutesProvider', function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider, $resourceProvider, RoutesProvider) {
 			var routes = RoutesProvider.$get().routes();
 			for (var path in routes) {
@@ -24,8 +24,21 @@
 			
 			$resourceProvider.defaults.stripTrailingSlashes = false;
 		}])
-		.run(['$rootScope', '$location', '$mdToast', 'Routes', function($rootScope, $location, $mdToast, Routes) {
-			// this is where you add auth stuff
+		.run(['$rootScope', '$location', '$mdToast', 'Routes', 'StudentFactory', function($rootScope, $location, $mdToast, Routes, StudentFactory) {
+			$rootScope.$on('$locationChangeStart', function(event, next, current) {
+				var routes = Routes.routes();
+				for (var i in routes) {
+					if (next.indexOf(i) != -1 && (routes[i].requiredLogin != StudentFactory.type())) {
+						event.preventDefault();
+						$location.path("/");
+						$mdToast.show(
+								$mdToast.simple()
+									.content("You must sign in to access this page!")
+									.position("top right")
+						);
+					}
+				}
+			});
 		}]);
 })();
 
