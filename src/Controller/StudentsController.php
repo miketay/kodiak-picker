@@ -192,8 +192,29 @@ class StudentsController extends AppController
 		try {
 			$this->Students->Tutorials->unlink($student, [$tutorial]);
 		} catch (Exception $e) {
-			throw new \Cake\Network\Excpetion\BadRequestException($e->getMessage());
+			throw new \Cake\Network\Exception\BadRequestException($e->getMessage());
 		}
+	}
+
+	public function login() {
+		// first see if it's an admin
+
+
+		// then attempt to login a student
+		$student = $this->request->data('student');
+		$password = $this->request->data('password');
+		$realStudent = $this->Students->get($password);
+		// okay if we made it this far it's a real student
+		// now to see if they put the password in correctly
+		foreach ($student as $key => $value) {
+			if ($realStudent[$key] != $student[$key]) {
+				throw new \Cake\Network\Exception\ForbiddenException();
+			}
+		}
+		$realStudent['type'] = "student";
+		$this->set([
+			'student' => $realStudent
+		]);
 	}
 
 }

@@ -18,7 +18,7 @@
 			$scope.querySearch = function(query) {
 				// filter list
 				var results = $filter('filter')($scope.students, query);
-				// results = $filter('filter')(results, $scope.students);
+				results = $filter('filter')(results, $scope.selected);
 				return results;
 			};
 			

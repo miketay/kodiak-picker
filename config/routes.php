@@ -51,6 +51,10 @@ Router::scope('/api', function($routes) {
 			'import' => [
 				'action' => 'import',
 				'method' => 'POST',
+			],
+			'login' => [
+				'action' => 'login',
+				'method' => 'POST',
 			]
 		]
 	]);

@@ -1,5 +1,36 @@
 <div layout="column">
-	<h1>Landing Page</h1>
-	<p>Will be a login in screen</p>
+	<h1>Login</h1>
+	<div ng-messages="login.$error" class="md-warn">
+		<div ng-message="login">Login Failed</div>
+	</div>
+	<form name="login" ng-submit="submit()" novalidate>
+		<md-autocomplete
+			md-selected-item="selected"
+			md-selected-item-change="null"
+			md-search-text="searchText"
+			md-search-text-change="null"
+			md-floating-label="Enter Name:"
+			md-input-name="name"
+			md-items="student in querySearch(searchText)"
+			md-item-text="student.first_name+' '+student.last_name">
+			<md-item-template>
+				<span md-highlight-text="searchText" md-highlight-flags="^i">{{student.last_name}}, {{student.first_name}}</span>
+			</md-item-template>
+			<md-not-found>
+				No student found for "{{searchText}}".
+			</md-not-found>
+			<div ng-messages="login.name.$error">
+				<div ng-message="required">This is required</div>
+			</div>
+		</md-autocomplete>
+		<md-input-container>
+			<label for="password">Password:</label>
+			<input id="password" name="password" ng-model="password" type="password" required />
+			<div ng-messages="login.password.$error" ng-if="login.password.$dirty">
+				<div ng-message="required">This is required</div>
+			</div>
+		</md-input-container>
+		<md-button class="md-primary md-raised">Login</md-button>
+	</form>
 </div>
 
