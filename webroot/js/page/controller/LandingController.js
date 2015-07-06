@@ -5,7 +5,11 @@
 		.controller('LandingController', ['$scope', '$filter', '$location', 'Page', 'StudentResource', 'StudentFactory', function LandingController($scope, $filter, $location, Page, StudentResource, StudentFactory) {
 			Page.title("Kodiak - Login");
 			
-			$scope.students = StudentResource.query();
+			$scope.students = StudentResource.query(function() {
+				$scope.students.push({
+					first_name:"admin",
+				});
+			});
 
 			$scope.querySearch = function(query) {
 				// filter list
@@ -24,7 +28,7 @@
 				StudentFactory.login($scope.selected, $scope.password).then(function(data) {
 					// save current user to some singleton, go to appropriate page
 					if (data.type == "admin") {
-						$location.path("/admin");
+						$location.path("/admin/import");
 					} else {
 						$location.path("/tutorials");
 					}

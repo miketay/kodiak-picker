@@ -19,18 +19,23 @@
                 "admin":[
 				{
 					"icon": "",
-					"text": "Admin",
-					"url": "/admin"
+					"text": "Import Students",
+					"url": "/admin/import"
 				},
 				{
 					"icon": "",
-					"text": "Import Students",
-					"url": "/import"
+					"text": "Students",
+					"url": "/admin/students"
 				},
 				{
 					"icon": "",
 					"text": "Cycles",
-					"url": "/cycles"
+					"url": "/admin/cycles"
+				},
+				{
+					"icon": "",
+					"text": "Logout",
+					"url": "/admin/logout"
 				}]
 			};
 

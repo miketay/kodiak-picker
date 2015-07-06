@@ -26,7 +26,7 @@
 					StudentFactory.upload(file).then(function success(data) {
 						console.log("successfully imported student list");
 						$scope.importing = false;
-						$location.path("/students");
+						$location.path("/admin/students");
 					}, function error(data) {
 						$scope.serverError = data.message;
 						$scope.uploadForm.files.$setValidity('serverError', false);

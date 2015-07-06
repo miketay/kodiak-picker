@@ -197,25 +197,37 @@ class StudentsController extends AppController
 	}
 
 	public function login() {
+		$data = $this->request->data('student');
 		// first see if it's an admin
-
-
-		// then attempt to login a student
-		$student = $this->request->data('student');
-		unset($student['full_name']);
-		$password = $this->request->data('password');
-		$realStudent = $this->Students->get($password);
-		// okay if we made it this far it's a real student
-		// now to see if they put the password in correctly
-		foreach ($student as $key => $value) {
-			if ($realStudent[$key] != $student[$key]) {
+		if ($data['first_name'] == "admin") {
+			if ($this->request->data('password') == "Y1d%D") { // TODO: more dynamic?
+				$session = $this->request->session();
+				$session->write('admin', true);
+				$data['type'] = "admin";
+				$this->set([
+					'student' => $data
+				]);
+			} else {
 				throw new \Cake\Network\Exception\ForbiddenException();
 			}
+		} else {
+			// then attempt to login a student
+			$student = $data;
+			unset($student['full_name']);
+			$password = $this->request->data('password');
+			$realStudent = $this->Students->get($password);
+			// okay if we made it this far it's a real student
+			// now to see if they put the password in correctly
+			foreach ($student as $key => $value) {
+				if ($realStudent[$key] != $student[$key]) {
+					throw new \Cake\Network\Exception\ForbiddenException();
+				}
+			}
+			$realStudent['type'] = "student";
+			$this->set([
+				'student' => $realStudent
+			]);
 		}
-		$realStudent['type'] = "student";
-		$this->set([
-			'student' => $realStudent
-		]);
 	}
 
 }

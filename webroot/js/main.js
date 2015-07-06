@@ -28,7 +28,7 @@
 			$rootScope.$on('$locationChangeStart', function(event, next, current) {
 				var routes = Routes.routes();
 				for (var i in routes) {
-					if (next.indexOf(i) != -1 && (routes[i].requiredLogin != StudentFactory.type())) {
+					if (next == i && (routes[i].requiredLogin != StudentFactory.type())) {
 						event.preventDefault();
 						$location.path("/");
 						$mdToast.show(

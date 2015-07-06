@@ -24,6 +24,11 @@
 					controller: "StudentImportController",
 					requiredLogin: "admin" 
 				},
+				"/admin/students": {
+					templateUrl: "/js/student/view/list.html",
+					controller: "StudentListController",
+					requiredLogin: "admin"
+				},
 				"/admin/cycles": {
 					templateUrl: "/js/cycle/view/index.html",
 					controller: "CycleListController",
@@ -38,6 +43,11 @@
 					templateUrl: "/js/tutorial/view/detail.html",
 					controller: "TutorialDetailController",
 					requiredLogin: "admin" 
+				},
+				"/admin/logout": {
+					templateUrl: "/js/page/view/landing.html",
+					controller: "LogoutController",
+					requiredLogin: "admin"
 				}
 			};
 
