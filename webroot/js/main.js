@@ -27,6 +27,7 @@
 		.run(['$rootScope', '$location', '$mdToast', 'Routes', 'StudentFactory', function($rootScope, $location, $mdToast, Routes, StudentFactory) {
 			$rootScope.$on('$locationChangeStart', function(event, next, current) {
 				var routes = Routes.routes();
+				next = next.replace($location.protocol()+"://"+$location.host(), "");
 				for (var i in routes) {
 					if (next == i && (routes[i].requiredLogin != StudentFactory.type())) {
 						event.preventDefault();
