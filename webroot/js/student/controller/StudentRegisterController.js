@@ -6,7 +6,7 @@
 
 			$scope.searchText = null;
 			$scope.selStudents = [];
-			$scope.selected = null;
+			$scope.selected = [];
 			$scope.students = StudentResource.query();
 
 			$scope.submit = function() {

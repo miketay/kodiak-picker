@@ -35,7 +35,7 @@
 			};
 
 			$scope.navigate = function(id) {
-				$location.path("/cycles/"+id);
+				$location.path("/admin/cycles/"+id);
 			};
 
 			$scope.edit = function(id, ev) {

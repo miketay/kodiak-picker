@@ -28,7 +28,7 @@
 				StudentFactory.login($scope.selected, $scope.password).then(function(data) {
 					// save current user to some singleton, go to appropriate page
 					if (data.type == "admin") {
-						$location.path("/admin/import");
+						$location.path("/admin/students");
 					} else {
 						$location.path("/tutorials");
 					}

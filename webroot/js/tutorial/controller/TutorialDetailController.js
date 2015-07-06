@@ -21,7 +21,7 @@
 			});
 
 			$scope.navigate = function(id) {
-				$location.path("/students/"+id);
+				$location.path("/admin/students/"+id);
 			};
 
 			$scope.add = function(ev) {

@@ -42,7 +42,7 @@
 			};
 
 			$scope.navigate = function(id) {
-				$location.path("cycles/"+$scope.cycle.id+"/tutorials/"+id);
+				$location.path("/admin/cycles/"+$scope.cycle.id+"/tutorials/"+id);
 			};
 
 			$scope.edit = function(id, ev) {
