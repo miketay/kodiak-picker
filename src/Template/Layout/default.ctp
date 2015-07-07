@@ -91,6 +91,7 @@ FULL_BASE_URL = '<?= $this->request->webroot; ?>';
 	<script src="/js/page/provider/NavFactory.js"></script>
 	<script src="/js/page/controller/MainController.js"></script>
 	<script src="/js/page/controller/LandingController.js"></script>
+	<script src="/js/page/controller/LogoutController.js"></script>
 	<script src="/js/page/directive/FileUploadDirective.js"></script>
 
 	<script src="/js/tutorial/Tutorial.js"></script>

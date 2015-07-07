@@ -54,6 +54,9 @@
 				},
 				user: function() {
 					return currentUser;
+				},
+				logout: function() {
+					currentUser = {};
 				}
 			};
 		}]);
