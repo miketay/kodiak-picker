@@ -1,7 +1,10 @@
 <div layout="row">
 	<md-list>
-		<md-list-item ng-repeat="student in students">
-			{{student.full_name}}
+		<md-list-item class="md-2-line" ng-repeat="student in students">
+			<div class="md-list-item-text">
+				<h3>{{student.full_name}}</h3>
+				<p><strong>Id:</strong> {{student.id}}</p>
+			</div>
 		</md-list-item>
 	</md-list>
 </div>
