@@ -24,11 +24,17 @@ class TutorialsController extends AppController
      */
     public function index()
 	{
-		$conditions = [];
-		if (isset($this->request->params['cycle_id'])) {
-			$conditions['cycle_id'] = $this->request->params['cycle_id'];
-		}
 		$tutorials = $this->Tutorials->find('all', ['conditions' => $conditions]);
+		if (isset($this->request->params['cycle_id'])) {
+			$cycleId = $this->request->params['cycle_id'];
+			if ($cycleId == 0) {
+				$tutorials->matching('Cycles', function($q) {
+					return $q->where(['Cycles.status' => "Active"]);
+				});
+			} else {
+				$tutorials->where(['cycle_id'=>$cycleId]);
+			}
+		}
 		$this->set([
 			'tutorials' => $tutorials,
 		]);

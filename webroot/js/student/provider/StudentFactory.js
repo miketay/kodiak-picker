@@ -48,6 +48,12 @@
 				},
 				type: function() {
 					return currentUser.type ? currentUser.type : "none";
+				},
+				userId: function() {
+					return currentUser.id;
+				},
+				user: function() {
+					return currentUser;
 				}
 			};
 		}]);

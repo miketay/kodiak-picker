@@ -20,6 +20,7 @@
 				.icon("add",	"/assets/svg/add.svg",	24)
 				.icon("share",	"/assets/svg/share.svg",24)
 				.icon("close",	"/assets/svg/close.svg",24)
+				.icon("lock",   "/assets/svg/lock.svg", 24)
 				.icon("create",	"/assets/svg/create.svg",24);
 			
 			$resourceProvider.defaults.stripTrailingSlashes = false;

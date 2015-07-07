@@ -10,7 +10,7 @@
 					requiredLogin: "none"
 				},
 				"/tutorials": {
-					templateUrl: "/js/tutorials/view/index.html",
+					templateUrl: "/js/tutorial/view/index.html",
 					controller: "TutorialListController",
 					requiredLogin: "student"
 				},

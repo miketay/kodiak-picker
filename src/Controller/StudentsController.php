@@ -30,6 +30,12 @@ class StudentsController extends AppController
 			$students->matching('Tutorials', function($q) {
 				return $q->where(['Tutorials.id' => $this->request->params['tutorial_id']]);
 			});
+		} else {
+			$students->contain(['Tutorials'=> function($q) {
+				return $q->matching('Cycles', function($q) {
+					return $q->where(['Cycles.status' => "Active"]);
+				});
+			}]);
 		}
 		$this->set([
 			'students' => $students
@@ -214,8 +220,17 @@ class StudentsController extends AppController
 			// then attempt to login a student
 			$student = $data;
 			unset($student['full_name']);
+			unset($student['tutorials']);
 			$password = $this->request->data('password');
-			$realStudent = $this->Students->get($password);
+			//$realStudent = $this->Students->get($password);
+			$realStudent = $this->Students->find()
+				->where(['Students.id' => $password])
+				->contain(['Tutorials' => function($q) {
+					return $q->matching('Cycles', function($q) {
+						return $q->where(['Cycles.status' => "Active"]);
+					});
+				}])
+				->first();
 			// okay if we made it this far it's a real student
 			// now to see if they put the password in correctly
 			foreach ($student as $key => $value) {
