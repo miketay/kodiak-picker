@@ -27,6 +27,7 @@ $debug = \Cake\Core\Configure::read('debug');
 
 	<link rel="stylesheet" href="/bower_components/angular-material/angular-material.<?= $debug ? '' : 'min.' ?>css" />
 	<link rel="stylesheet" href="/css/app.css" />
+	<link rel="stylesheet" href="/css/print.css" media="print" />
 <script>
 FULL_BASE_URL = '<?= $this->request->webroot; ?>';
 </script>
