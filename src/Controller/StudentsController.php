@@ -33,7 +33,7 @@ class StudentsController extends AppController
 		} else {
 			$students->contain(['Tutorials'=> function($q) {
 				return $q->matching('Cycles', function($q) {
-					return $q->where(['Cycles.status' => "Active"]);
+					return $q->where(['Cycles.status' => "Open"]);
 				});
 			}]);
 		}
@@ -227,7 +227,7 @@ class StudentsController extends AppController
 				->where(['Students.id' => $password])
 				->contain(['Tutorials' => function($q) {
 					return $q->matching('Cycles', function($q) {
-						return $q->where(['Cycles.status' => "Active"]);
+						return $q->where(['Cycles.status' => "Open"]);
 					});
 				}])
 				->first();
