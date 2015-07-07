@@ -2,8 +2,8 @@
 	<md-list>
 		<md-list-item class="md-2-line" ng-repeat="student in students" ng-click="navigate(student.id)">
 			<div class="md-list-item-text">
-				<h3>{{student.last_name}}, {{student.first_nam}}</h3>
-				<p>Grade: {{student.grade}}</p>
+				<h3>{{student.last_name}}, {{student.first_name}}</h3>
+				<p>Grade: {{student.grade_level}}</p>
 			</div>
 			<md-icon class="md-secondary md-warn" aria-label="Remove student from tutorial" md-svg-icon="close" ng-click="remove(student.id)"><md-tooltip>Remove From Tutorial</md-tooltip></md-icon>
 			<md-divider ng-if="!$last"></md-divider>
