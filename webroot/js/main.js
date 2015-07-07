@@ -27,17 +27,25 @@
 		}])
 		.run(['$rootScope', '$location', '$mdToast', 'Routes', 'StudentFactory', function($rootScope, $location, $mdToast, Routes, StudentFactory) {
 			$rootScope.$on('$locationChangeStart', function(event, next, current) {
-				var routes = Routes.routes();
+				var signin = function() {
+					event.preventDefault();
+					$location.path("/");
+					$mdToast.show(
+							$mdToast.simple()
+								.content("You must sign in to access this page!")
+								.position("top right")
+					);
+				};
 				next = next.replace($location.protocol()+"://"+$location.host(), "");
+				// if they aren't signed in at all, they can only be on the root
+				if (next != "/" && StudentFactory.type() == "none") {
+					signin();
+				}
+				// check proper permissions for each page
+				var routes = Routes.routes();
 				for (var i in routes) {
 					if (next == i && (routes[i].requiredLogin != StudentFactory.type())) {
-						event.preventDefault();
-						$location.path("/");
-						$mdToast.show(
-								$mdToast.simple()
-									.content("You must sign in to access this page!")
-									.position("top right")
-						);
+						signin();
 					}
 				}
 			});
