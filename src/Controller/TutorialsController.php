@@ -29,7 +29,7 @@ class TutorialsController extends AppController
 			$cycleId = $this->request->params['cycle_id'];
 			if ($cycleId == 0) {
 				$tutorials->matching('Cycles', function($q) {
-					return $q->where(['Cycles.status' => "Active"]);
+					return $q->where(['Cycles.status' => "Open"]);
 				});
 			} else {
 				$tutorials->where(['cycle_id'=>$cycleId]);
