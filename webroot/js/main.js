@@ -21,6 +21,11 @@
 				.icon("share",	"/assets/svg/share.svg",24)
 				.icon("close",	"/assets/svg/close.svg",24)
 				.icon("lock",   "/assets/svg/lock.svg", 24)
+				.icon("logout", "/assets/svg/logout.svg",24)
+				.icon("cycle",	"/assets/svg/cycle.svg"	,24)
+				.icon("import",	"/assets/svg/import.svg",24)
+				.icon("report",	"/assets/svg/report.svg",24)
+				.icon("students","/assets/svg/students.svg",24)
 				.icon("create",	"/assets/svg/create.svg",24);
 			
 			$resourceProvider.defaults.stripTrailingSlashes = false;
@@ -40,12 +45,14 @@
 				// if they aren't signed in at all, they can only be on the root
 				if (next != "/" && StudentFactory.type() == "none") {
 					signin();
+					return;
 				}
 				// check proper permissions for each page
 				var routes = Routes.routes();
 				for (var i in routes) {
 					if (next == i && (routes[i].requiredLogin != StudentFactory.type())) {
 						signin();
+						return;
 					}
 				}
 			});
