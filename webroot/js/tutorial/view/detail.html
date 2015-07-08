@@ -6,12 +6,12 @@
 	</md-content>
 	<md-divider></md-divider>
 	<md-list>
-		<md-list-item class="md-2-line" ng-repeat="student in students" ng-click="navigate(student.id)">
+		<md-list-item class="md-2-line" ng-repeat="student in students">
 			<div class="md-list-item-text">
 				<h3>{{student.last_name}}, {{student.first_name}}</h3>
 				<p>Grade: {{student.grade_level}}</p>
 			</div>
-			<md-icon class="md-secondary md-warn" aria-label="Remove student from tutorial" md-svg-icon="close" ng-click="remove(student.id)"><md-tooltip>Remove From Tutorial</md-tooltip></md-icon>
+			<md-icon class="md-secondary md-warn cursor" style="margin-top:0px;" aria-label="Remove student from tutorial" md-svg-icon="close" ng-click="remove(student.id)"><md-tooltip>Remove From Tutorial</md-tooltip></md-icon>
 			<md-divider ng-if="!$last"></md-divider>
 		</md-list-item>
 		<md-list-item ng-if="students.length == 0">

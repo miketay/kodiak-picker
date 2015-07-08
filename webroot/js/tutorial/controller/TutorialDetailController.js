@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('Tutorial')
-		.controller('TutorialDetailController', ['$scope', '$mdDialog', '$location', '$routeParams', 'Page', 'TutorialCycleResource', 'StudentTutorialResource', function TutorialDetailController($scope, $mdDialog, $location, $routeParams, Page, TutorialCycleResource, StudentTutorialResource) {
+		.controller('TutorialDetailController', ['$scope', '$mdDialog', '$routeParams', 'Page', 'TutorialCycleResource', 'StudentTutorialResource', function TutorialDetailController($scope, $mdDialog, $routeParams, Page, TutorialCycleResource, StudentTutorialResource) {
 			var getStudents = function() {
 				$scope.message = "Loading...";
 				$scope.students = StudentTutorialResource.query({
@@ -19,10 +19,6 @@
 			}, function() {
 				Page.title($scope.tutorial.name+" Students");
 			});
-
-			$scope.navigate = function(id) {
-				$location.path("/admin/students/"+id);
-			};
 
 			$scope.add = function(ev) {
 				$mdDialog.show({
