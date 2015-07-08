@@ -12,33 +12,33 @@
 				}],
 				"student":[
 				{
-					"icon": "",
+					"icon": "logout",
 					"text": "Logout",
 					"url": "/logout"
 				}],
                 "admin":[
 				{
-					"icon": "",
+					"icon": "import",
 					"text": "Import Students",
 					"url": "/admin/import"
 				},
 				{
-					"icon": "",
+					"icon": "students",
 					"text": "Students",
 					"url": "/admin/students"
 				},
 				{
-					"icon": "",
+					"icon": "report",
 					"text": "Student Report",
 					"url": "/admin/student-report"
 				},
 				{
-					"icon": "",
+					"icon": "cycle",
 					"text": "Cycles",
 					"url": "/admin/cycles"
 				},
 				{
-					"icon": "",
+					"icon": "logout",
 					"text": "Logout",
 					"url": "/admin/logout"
 				}]
