@@ -1,6 +1,6 @@
 <div layout="column">
 	<md-list>
-		<md-subheader class="md-primary" ng-if="registered()">Current Registration</md-subheader>
+		<md-subheader class="md-primary md-no-sticky" ng-if="registered()">Current Registration</md-subheader>
 		<md-list-item class="md-3-line" ng-if="registered()">
 			<div class="md-list-item-text">
 				<h3>{{tutorial.name}}</h3>
@@ -9,8 +9,8 @@
 			</div>
 			<md-icon ng-if="locked()" md-svg-icon="lock"></md-icon>
 		</md-list-item>
-		<md-subheader class="md-primary" ng-if="!locked()">Currently Open Tutorials</md-subheader>
-		<md-list-item class="md-2-line" ng-if="!locked()" ng-repeat="tutorial in tutorials" ng-click="select(tutorial.id)">
+		<md-subheader class="md-primary md-no-sticky" ng-if="!locked()">Currently Open Tutorials</md-subheader>
+		<md-list-item class="md-2-line" ng-if="!locked()" ng-repeat="tutorial in list()" ng-click="select(tutorial.id, $event)">
 			<div class="md-list-item-text">
 				<h3>{{tutorial.name}}</h3>
 				<p>{{tutorial.teacher_name}}</p>

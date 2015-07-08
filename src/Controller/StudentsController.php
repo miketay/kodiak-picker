@@ -171,7 +171,6 @@ class StudentsController extends AppController
 				// delete the current one if it's not locked
 				$locked = $regTutorial['_joinData']['locked'];
 				if ($lock || !$locked) {
-					die();
 					$this->Students->Tutorials->unlink($student, [$regTutorial]);
 				} else {
 					throw new \Cake\Network\Exception\ForbiddenException("locked");
