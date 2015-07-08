@@ -38,11 +38,9 @@
 					// register student w/ lock
 					var i = 0;
 					var register = function() {
-						var reg = {
-							tutorial_id: $routeParams.tutorial_id,
-							student_id: data[i].id
-						};
-						StudentTutorialResource.register(reg, function() {
+						var reg = new StudentTutorialResource();
+						reg.lock = true;
+						reg.$register({tutorial_id: $routeParams.tutorial_id,student_id: data[i].id}, function() {
 							i++;
 							if (i == data.length) {
 								getStudents();
