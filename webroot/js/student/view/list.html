@@ -1,10 +1,11 @@
-<div layout="row">
+<div layout="column">
 	<md-list>
 		<md-list-item class="md-2-line" ng-repeat="student in students">
 			<div class="md-list-item-text">
 				<h3>{{student.full_name}}</h3>
 				<p><strong>Id:</strong> {{student.id}}</p>
 			</div>
+			<md-icon class="md-secondary md-warn cursor" aria-label="Delete student" md-svg-icon="close" ng-click="delete($index, $event)"><md-tooltip>Delete Student</md-tooltip></md-icon>
 		</md-list-item>
 	</md-list>
 </div>

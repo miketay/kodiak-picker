@@ -147,6 +147,10 @@ span.name {
 	top: 20px;
 }
 
+.cursor {
+	cursor: pointer;
+}
+
 table {
 	width: 100%;
 }
