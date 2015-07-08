@@ -24,7 +24,7 @@
 			$scope.list = function() {
 				var result = [];
 				for (var i=0; i<tutorials.length; i++) {
-					if (tutorials[i].id != $scope.tutorial.id) {
+					if (tutorials[i].id != $scope.tutorial.id && tutorials[i].students.length <= tutorials[i].max_students) {
 						result.push(tutorials[i]);
 					}
 				}

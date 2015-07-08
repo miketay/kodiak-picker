@@ -24,7 +24,8 @@ class TutorialsController extends AppController
      */
     public function index()
 	{
-		$tutorials = $this->Tutorials->find('all');
+		$tutorials = $this->Tutorials->find('all')
+			->contain('Students');
 		if (isset($this->request->params['cycle_id'])) {
 			$cycleId = $this->request->params['cycle_id'];
 			if ($cycleId == 0) {

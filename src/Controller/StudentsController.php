@@ -163,7 +163,12 @@ class StudentsController extends AppController
 		]);
 		$lock = !!$this->request->data('lock');
 		$tutorial_id = $this->request->params['tutorial_id'];
-		$tutorial = $this->Students->Tutorials->get($tutorial_id);
+		$tutorial = $this->Students->Tutorials->get($tutorial_id, [
+			'contain' => ['Students']
+		]);
+		if (count($tutorial['students']) >= $tutorial['max_students']) {
+			throw new \Cake\Network\Exception\BadRequestException("full");
+		}
 		// see if they are already registered for a tutorial in this cycle
 		// delete it if they are
 		foreach ($student['tutorials'] as $regTutorial) {
