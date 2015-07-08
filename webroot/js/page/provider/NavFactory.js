@@ -12,11 +12,6 @@
 				}],
 				"student":[
 				{
-					"icon": "home",
-					"text": "Home",
-					"url": "/"
-				},
-				{
 					"icon": "",
 					"text": "Logout",
 					"url": "/logout"
