@@ -55,6 +55,10 @@ Router::scope('/api', function($routes) {
 			'login' => [
 				'action' => 'login',
 				'method' => 'POST',
+			],
+			':status' => [
+				'action' => 'index',
+				'method' => 'GET'
 			]
 		]
 	]);

@@ -25,15 +25,17 @@ class StudentsController extends AppController
      */
     public function index()
 	{
+		$status = isset($this->request->params['status']) ? $this->request->params['status'] : "Open";
+		$status = ucfirst(strtolower($status));
 		$students = $this->Students->find('all');
 		if (isset($this->request->params['tutorial_id'])) {
 			$students->matching('Tutorials', function($q) {
 				return $q->where(['Tutorials.id' => $this->request->params['tutorial_id']]);
 			});
 		} else {
-			$students->contain(['Tutorials'=> function($q) {
-				return $q->matching('Cycles', function($q) {
-					return $q->where(['Cycles.status' => "Open"]);
+			$students->contain(['Tutorials'=> function($q) use ($status) {
+				return $q->matching('Cycles', function($q) use ($status) {
+					return $q->where(['Cycles.status' => $status]);
 				});
 			}]);
 		}

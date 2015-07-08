@@ -1,3 +1,12 @@
-.md-sidenav-left, .md-secondary-container, .md-fab, iframe {
+md-toolbar, md-sidenav, .md-secondary-container, .md-fab, iframe {
 	display: none !important;
+}
+md-content {
+	border: 0;
+	float: none;
+	height: auto;
+	margin: 0 5%;
+	overflow: visible !important;
+	padding: 0;
+	position: static;
 }

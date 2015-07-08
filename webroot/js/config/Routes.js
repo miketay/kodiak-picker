@@ -29,6 +29,11 @@
 					controller: "StudentListController",
 					requiredLogin: "admin"
 				},
+				"/admin/student-report": {
+					templateUrl: "/js/student/view/report.html",
+					controller: "StudentReportController",
+					requiredLogin: "admin"
+				},
 				"/admin/cycles": {
 					templateUrl: "/js/cycle/view/index.html",
 					controller: "CycleListController",

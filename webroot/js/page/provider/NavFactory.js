@@ -29,6 +29,11 @@
 				},
 				{
 					"icon": "",
+					"text": "Student Report",
+					"url": "/admin/student-report"
+				},
+				{
+					"icon": "",
 					"text": "Cycles",
 					"url": "/admin/cycles"
 				},

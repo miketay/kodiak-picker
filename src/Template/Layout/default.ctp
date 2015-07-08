@@ -114,6 +114,7 @@ FULL_BASE_URL = '<?= $this->request->webroot; ?>';
 	<script src="/js/student/controller/StudentImportController.js"></script>
 	<script src="/js/student/controller/StudentRegisterController.js"></script>
 	<script src="/js/student/controller/StudentListController.js"></script>
+	<script src="/js/student/controller/StudentReportController.js"></script>
 
 	<script src="/js/main.js"></script>
 </body>
