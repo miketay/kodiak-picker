@@ -4,3 +4,4 @@
 /logs/*
 composer.phar
 db.sqlite
+*.htaccess
