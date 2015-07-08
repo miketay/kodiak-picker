@@ -36,18 +36,22 @@
 					bindToController: true
 				}).then(function(data) {
 					// register student w/ lock
-					var count = 0;
-					for (var i=0; i<data.length; i++) {
-						var newReg = new StudentTutorialResource();
-						newReg.lock = true;
-						newReg.$register({tutorial_id: $routeParams.tutorial_id, student_id: data[i].id}, function() {
-							count++;
-							if (count == data.length) {
+					var i = 0;
+					var register = function() {
+						var reg = {
+							tutorial_id: $routeParams.tutorial_id,
+							student_id: data[i].id
+						};
+						StudentTutorialResource.register(reg, function() {
+							i++;
+							if (i == data.length) {
 								getStudents();
+							} else {
+								register();
 							}
 						});
-					}
-
+					};
+					register();
 				});
 			};
 
