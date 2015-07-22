@@ -125,7 +125,9 @@ class StudentsController extends AppController
 			throw new \Cake\Network\Exception\BadRequestException("Malformed File");
 		}
 		$file = substr($file, $listStart);
-		$file = explode("\r\n", $file);
+		$file = str_replace("\r\n","\n", $file);
+		$file = str_replace("\r","\n", $file);
+		$file = explode("\n", $file);
 
 		$this->Students->connection()->transactional(function() use ($file) {
 			$rows = count($file);
