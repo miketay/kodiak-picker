@@ -19,9 +19,14 @@
 
 			$scope.submit = function() {
 				$scope.login.$setValidity('login', true);
-				if ($scope.selected == null) {
+				if ($scope.selected == null && $scope.searchText !== "admin") {
 					$scope.login.name.$setValidity('required', false);
 					return;
+				}
+				if ($scope.selected == null && $scope.searchText == "admin") {
+					$scope.selected = {
+						first_name: "admin"
+					};
 				}
 
 				// query server for login
