@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('Tutorial')
-		.controller('TutorialDetailController', ['$scope', '$mdDialog', '$routeParams', 'Page', 'TutorialCycleResource', 'StudentTutorialResource', function TutorialDetailController($scope, $mdDialog, $routeParams, Page, TutorialCycleResource, StudentTutorialResource) {
+		.controller('TutorialDetailController', ['$scope', '$mdDialog', '$mdToast', '$routeParams', 'Page', 'TutorialCycleResource', 'StudentTutorialResource', function TutorialDetailController($scope, $mdDialog, $mdToast, $routeParams, Page, TutorialCycleResource, StudentTutorialResource) {
 			var getStudents = function() {
 				$scope.message = "Loading...";
 				$scope.students = StudentTutorialResource.query({
@@ -41,7 +41,16 @@
 							if (i == data.length) {
 								getStudents();
 							} else {
+								getStudents();
 								register();
+							}
+						}, function(data) {
+							// error handler?
+							if (data.data.message == "full") {
+								$mdToast.show($mdToast.simple()
+									.content("This Tutorial is Full!")
+									.position("top right")
+								);
 							}
 						});
 					};
