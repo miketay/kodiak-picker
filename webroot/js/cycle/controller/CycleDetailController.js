@@ -61,7 +61,7 @@
 						$scope.tutorials.splice(i, 1);
 					} else {
 						angular.extend($scope.tutorials[i], data);
-						$scope.tutorials[i].$update();
+						$scope.tutorials[i].$update({tutorial_id:data.id});
 					}
 				});
 			};
