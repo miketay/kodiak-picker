@@ -54,7 +54,9 @@ class StudentsController extends AppController
     public function view($id = null)
     {
         $student = $this->Students->get($id, [
-            'contain' => ['Tutorials']
+			'contain' => ['Tutorials' => function($q) {
+				return $q->contain('Cycles');
+			}]
         ]);
         $this->set('student', $student);
     }
@@ -234,9 +236,7 @@ class StudentsController extends AppController
 			$realStudent = $this->Students->find()
 				->where(['Students.id' => $password])
 				->contain(['Tutorials' => function($q) {
-					return $q->matching('Cycles', function($q) {
-						return $q->where(['Cycles.status' => "Open"]);
-					});
+					return $q->contain('Cycles');
 				}])
 				->first();
 			// okay if we made it this far it's a real student

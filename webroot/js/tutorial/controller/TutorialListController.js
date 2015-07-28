@@ -7,9 +7,20 @@
 
 			var tutorials = TutorialCycleResource.query({cycle_id:0});
 			$scope.user = StudentFactory.user();
-			$scope.tutorial = [];
+			$scope.tutorial = {
+				"active": [],
+				"open": []
+			};
 			if (!!$scope.user.tutorials.length) {
-				$scope.tutorial = $scope.user.tutorials[0];
+				// find active and open tutorials
+				for (var i=0; i<$scope.user.tutorials.length; i++) {
+					var tutorial = $scope.user.tutorials[i];
+					if (tutorial['cycle']['status'] == "Open") {
+						$scope.tutorial['open'] = $scope.user.tutorials[i];
+					} else if (tutorial['cycle']['status'] == "Active") {
+						$scope.tutorial['active'] = $scope.user.tutorials[i];
+					}
+				}
 			}
 
 			var find = function(id) {
@@ -42,20 +53,20 @@
 					.targetEvent(ev);
 				$mdDialog.show(conf).then(function() {
 					StudentTutorialResource.register({student_id:StudentFactory.userId(), tutorial_id:id}, function(data) {
-						$scope.tutorial = data.tutorials[0];
+						$scope.tutorial['open'] = tut;
 					});
 				}, function() {
 					// do nothing
 				});
 			};
 
-			$scope.registered = function() {
-				return !!$scope.tutorial.id;
+			$scope.registered = function(type) {
+				return !!$scope.tutorial[type].id;
 			};
 
-			$scope.locked = function() {
-				if (!!$scope.tutorial.id) {
-					return !!$scope.tutorial._joinData.locked;
+			$scope.locked = function(type) {
+				if (!!$scope.tutorial[type].id) {
+					return !!$scope.tutorial[type]._joinData.locked;
 				}
 				return false;
 			};

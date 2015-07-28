@@ -1,19 +1,28 @@
 <div layout="column">
 	<md-list>
-		<md-subheader class="md-primary md-no-sticky" ng-if="registered()">Current Registration</md-subheader>
-		<md-list-item class="md-3-line" ng-if="registered()">
+		<md-subheader class="md-primary md-no-sticky" ng-if="registered('active')">Tutorial you are attending now:</md-subheader>
+		<md-list-item class="md-3-line" ng-if="registered('active')">
 			<div class="md-list-item-text">
-				<h3>{{tutorial.name}}</h3>
-				<h4>{{tutorial.teacher_name}}</h4>
-				<p>{{tutorial.room_number}}</p>
+				<h3>{{tutorial['active'].name}}</h3>
+				<h4>{{tutorial['active'].teacher_name}}</h4>
+				<p><strong>Room #:</strong> {{tutorial['active'].room_number}}</p>
 			</div>
-			<md-icon ng-if="locked()" md-svg-icon="lock"></md-icon>
+			<md-icon ng-if="locked('active')" md-svg-icon="lock"></md-icon>
 		</md-list-item>
-		<md-subheader class="md-primary md-no-sticky" ng-if="!locked()">Currently Open Tutorials</md-subheader>
-		<md-list-item class="md-2-line" ng-if="!locked()" ng-repeat="tutorial in list()" ng-click="select(tutorial.id, $event)">
+		<md-subheader class="md-primary md-no-sticky" ng-if="registered('open')">Tutorial you will attend next cycle</md-subheader>
+		<md-list-item class="md-3-line" ng-if="registered('open')">
 			<div class="md-list-item-text">
-				<h3>{{tutorial.name}}</h3>
-				<p>{{tutorial.teacher_name}}</p>
+				<h3>{{tutorial['open'].name}}</h3>
+				<h4>{{tutorial['open'].teacher_name}}</h3>
+				<p><strong>Room #:</strong> {{tutorial['open'].room_number}}</p>
+			</div>
+			<md-icon ng-if="locked('open')" md-svg-icon="lock"></md-icon>
+		</md-list-item>
+		<md-subheader class="md-primary md-no-sticky" ng-if="!locked('open')">Currently Open Tutorials</md-subheader>
+		<md-list-item class="md-2-line" ng-if="!locked('open')" ng-repeat="openTutorial in list()" ng-click="select(openTutorial.id, $event)">
+			<div class="md-list-item-text">
+				<h3>{{openTutorial.name}}</h3>
+				<p>{{openTutorial.teacher_name}}</p>
 			</div>
 			<md-divider ng-if="!$last"></md-divider>
 		</md-list-item>
