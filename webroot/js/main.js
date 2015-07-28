@@ -26,6 +26,8 @@
 				.icon("import",	"/assets/svg/import.svg",24)
 				.icon("report",	"/assets/svg/report.svg",24)
 				.icon("students","/assets/svg/students.svg",24)
+				.icon("up",		"/assets/svg/up.svg"	,24)
+				.icon("down",	"/assets/svg/down.svg"	,24)
 				.icon("create",	"/assets/svg/create.svg",24);
 			
 			$resourceProvider.defaults.stripTrailingSlashes = false;

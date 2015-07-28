@@ -1,21 +1,21 @@
 <div layout="column">
 	<table>
 		<thead>
-			<tr>
-				<th>Student Name</th>
-				<th>Grade Level</th>
-				<th>Tutorial</th>
-				<th>Instructor</th>
-				<th>Room #</th>
+			<tr class="cursor">
+				<th ng-click="newSort('full_name')">Student Name <md-icon md-svg-icon="down" ng-show="sortDown('full_name')"></md-icon><md-icon md-svg-icon="up" ng-show="sortUp('full_name')"></md-icon></th>
+				<th ng-click="newSort('grade_level')">Grade Level <md-icon md-svg-icon="down" ng-show="sortDown('grade_level')"></md-icon><md-icon md-svg-icon="up" ng-show="sortUp('grade_level')"></md-icon></th>
+				<th ng-click="newSort('tutorial')">Tutorial <md-icon md-svg-icon="down" ng-show="sortDown('tutorial')"></md-icon><md-icon md-svg-icon="up" ng-show="sortUp('tutorial')"></md-icon></th>
+				<th ng-click="newSort('instructor')">Instructor <md-icon md-svg-icon="down" ng-show="sortDown('instructor')"></md-icon><md-icon md-svg-icon="up" ng-show="sortUp('instructor')"></md-icon></th>
+				<th ng-click="newSort('room')">Room # <md-icon md-svg-icon="down" ng-show="sortDown('room')"></md-icon><md-icon md-svg-icon="up" ng-show="sortUp('room')"></md-icon></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="student in students">
+			<tr ng-repeat="student in students | orderBy:sort:reverse">
 				<td>{{student.full_name}}</td>
 				<td>{{student.grade_level}}</td>
-				<td>{{student.tutorials[0].name}}</td>
-				<td>{{student.tutorials[0].teacher_name}}</td>
-				<td>{{student.tutorials[0].room_number}}</td>
+				<td>{{student.tutorial}}</td>
+				<td>{{student.instructor}}</td>
+				<td>{{student.room}}</td>
 			</tr>
 		</tbody>
 	</table>
