@@ -1,4 +1,8 @@
 <div layout="column">
+	<div layout="row">
+		<md-button class="md-primary md-raised" ng-click="delete8()">Delete 8th Graders</md-button>
+		<md-progress-circular class="md-warn" md-diameter="24" md-mode="indeterminate" ng-show="deleting"></md-progress-circular>
+	</div>
 	<md-list>
 		<md-list-item class="md-3-line" ng-repeat="student in students">
 			<div class="md-list-item-text">
