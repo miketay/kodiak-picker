@@ -16,6 +16,27 @@
 					"text": "Logout",
 					"url": "/logout"
 				}],
+                "teacher":[
+				{
+					"icon": "students",
+					"text": "Students",
+					"url": "/admin/students"
+				},
+				{
+					"icon": "report",
+					"text": "Student Report",
+					"url": "/admin/student-report"
+				},
+				{
+					"icon": "cycle",
+					"text": "Cycles",
+					"url": "/admin/cycles"
+				},
+				{
+					"icon": "logout",
+					"text": "Logout",
+					"url": "/admin/logout"
+				}],
                 "admin":[
 				{
 					"icon": "import",

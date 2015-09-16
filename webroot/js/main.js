@@ -51,8 +51,9 @@
 				}
 				// check proper permissions for each page
 				var routes = Routes.routes();
+				var type = StudentFactory.type();
 				for (var i in routes) {
-					if (next == i && (routes[i].requiredLogin != StudentFactory.type())) {
+					if (next == i && (routes[i].requiredLogin.indexOf(type) === false)) {
 						signin();
 						return;
 					}

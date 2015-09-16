@@ -7,52 +7,52 @@
 				"/": {
 					templateUrl: "/js/page/view/landing.html",
 					controller: "LandingController",
-					requiredLogin: "none"
+					requiredLogin: ["none"]
 				},
 				"/tutorials": {
 					templateUrl: "/js/tutorial/view/index.html",
 					controller: "TutorialListController",
-					requiredLogin: "student"
+					requiredLogin: ["student"]
 				},
 				"/logout": {
 					templateUrl: "/js/page/view/landing.html",
 					controller: "LogoutController",
-					requiredLogin: "student"
+					requiredLogin: ["student"]
 				},
 				"/admin/import": {
 					templateUrl: "/js/student/view/import.html",
 					controller: "StudentImportController",
-					requiredLogin: "admin" 
+					requiredLogin: ["admin", "teacher"] 
 				},
 				"/admin/students": {
 					templateUrl: "/js/student/view/list.html",
 					controller: "StudentListController",
-					requiredLogin: "admin"
+					requiredLogin: ["admin", "teacher"]
 				},
 				"/admin/student-report": {
 					templateUrl: "/js/student/view/report.html",
 					controller: "StudentReportController",
-					requiredLogin: "admin"
+					requiredLogin: ["admin", "teacher"]
 				},
 				"/admin/cycles": {
 					templateUrl: "/js/cycle/view/index.html",
 					controller: "CycleListController",
-					requiredLogin: "admin" 
+					requiredLogin: ["admin", "teacher"] 
 				},
 				"/admin/cycles/:id": {
 					templateUrl: "/js/cycle/view/detail.html",
 					controller: "CycleDetailController",
-					requiredLogin: "admin" 
+					requiredLogin: ["admin", "teacher"] 
 				},
 				"/admin/cycles/:cycle_id/tutorials/:tutorial_id": {
 					templateUrl: "/js/tutorial/view/detail.html",
 					controller: "TutorialDetailController",
-					requiredLogin: "admin" 
+					requiredLogin: ["admin", "teacher"] 
 				},
 				"/admin/logout": {
 					templateUrl: "/js/page/view/landing.html",
 					controller: "LogoutController",
-					requiredLogin: "admin"
+					requiredLogin: ["admin", "teacher"]
 				}
 			};
 

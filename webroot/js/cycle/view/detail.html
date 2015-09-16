@@ -5,7 +5,7 @@
 				<h3>{{tutorial.name}}</h3>
 				<p>{{tutorial.teacher_name}}</p>
 			</div>
-			<md-icon class="md-secondary" ng-click="edit(tutorial.id, $event)" md-svg-icon="create" aria-label="Edit {{tutorial.name}}"><md-tooltip>Quick Edit</md-tooltip></md-icon>
+			<md-icon class="md-secondary" ng-click="edit(tutorial.id, $event)" md-svg-icon="create" aria-label="Edit {{tutorial.name}}" ng-if="admin()"><md-tooltip>Quick Edit</md-tooltip></md-icon>
 			<md-divider ng-if="!$last"></md-divider>
 		</md-list-item>
 		<md-list-item ng-if="tutorials.length == 0">
@@ -13,5 +13,5 @@
 		</md-list-item>
 	</md-list>
 </div>
-<md-button class="md-fab md-fab-bottom-right" ng-click="create($event)"><md-icon md-svg-icon="add" aria-label="Add New Tutorial"></md-icon><md-tooltip>Add New Tutorial</md-tooltip></md-button>
+<md-button class="md-fab md-fab-bottom-right" ng-click="create($event)" ng-if="admin()"><md-icon md-svg-icon="add" aria-label="Add New Tutorial"></md-icon><md-tooltip>Add New Tutorial</md-tooltip></md-button>
 

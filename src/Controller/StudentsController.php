@@ -226,6 +226,15 @@ class StudentsController extends AppController
 			} else {
 				throw new \Cake\Network\Exception\ForbiddenException();
 			}
+		} else if ($data['first_name'] == "teacher") {
+			if ($this->request->data('password') == "D%d1Y") { // TODO: more dynamic?
+				$data['type'] = "teacher";
+				$this->set([
+					'student' => $data
+				]);
+			} else {
+				throw new \Cake\Network\Exception\ForbiddenException();
+			}
 		} else {
 			// then attempt to login a student
 			$student = $data;

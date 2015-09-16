@@ -11,7 +11,7 @@
 				<h3>{{student.last_name}}, {{student.first_name}}</h3>
 				<p>Grade: {{student.grade_level}}</p>
 			</div>
-			<md-icon class="md-secondary md-warn cursor" style="margin-top:0px;" aria-label="Remove student from tutorial" md-svg-icon="close" ng-click="remove(student.id)"><md-tooltip>Remove From Tutorial</md-tooltip></md-icon>
+			<md-icon class="md-secondary md-warn cursor" style="margin-top:0px;" aria-label="Remove student from tutorial" md-svg-icon="close" ng-click="remove(student.id)" ng-if="admin()"><md-tooltip>Remove From Tutorial</md-tooltip></md-icon>
 			<md-divider ng-if="!$last"></md-divider>
 		</md-list-item>
 		<md-list-item ng-if="students.length == 0">
@@ -19,4 +19,4 @@
 		</md-list-item>
 	</md-list>
 </div>
-<md-button class="md-fab md-fab-bottom-right" ng-click="add($event)"><md-icon md-svg-icon="add" aria-label="Register Student"></md-icon><md-tooltip>Register Student</md-tooltip></md-button>
+<md-button class="md-fab md-fab-bottom-right" ng-click="add($event)" ng-if="admin()"><md-icon md-svg-icon="add" aria-label="Register Student"></md-icon><md-tooltip>Register Student</md-tooltip></md-button>

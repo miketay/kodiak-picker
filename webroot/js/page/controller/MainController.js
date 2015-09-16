@@ -2,9 +2,13 @@
 	'use strict';
 
 	angular.module('Page')
-		.controller('MainController', ['$scope', '$mdSidenav', 'Page', 'Nav', function MainController($scope, $mdSidenav, Page, Nav) {
+		.controller('MainController', ['$scope', '$mdSidenav', 'StudentFactory', 'Page', 'Nav', function MainController($scope, $mdSidenav, StudentFactory, Page, Nav) {
 			$scope.page = Page;
 			$scope.nav = Nav;
+
+			$scope.admin = function() {
+				return StudentFactory.type() === "admin";
+			};
 
 			$scope.toggleSidenav = function(which) {
 				$mdSidenav(which).toggle();
