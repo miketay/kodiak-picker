@@ -61,7 +61,7 @@
 					var i = $scope.students.length-1;
 					delete8(i);
 				}, function() {
-					// do nufin
+					$scope.deleting = false;
 				});
 			};
 
@@ -92,7 +92,7 @@
 					var i = $scope.students.length-1;
 					deleteAll(i);
 				}, function() {
-					// do nufin
+					$scope.deleting = false;
 				});
 
 			};
