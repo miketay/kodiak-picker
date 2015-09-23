@@ -21,7 +21,7 @@
 		<md-subheader class="md-primary md-no-sticky" ng-if="!locked('open')">Currently Open Tutorials</md-subheader>
 		<md-list-item class="md-2-line" ng-if="!locked('open')" ng-repeat="openTutorial in list()" ng-click="select(openTutorial.id, $event)">
 			<div class="md-list-item-text">
-				<h3>{{openTutorial.name}}</h3>
+				<h3>{{openTutorial.name}} <strong>{{openTutorial.students.length}}/{{openTutorial.max_students}}</strong></h3>
 				<p>{{openTutorial.teacher_name}}</p>
 			</div>
 			<md-divider ng-if="!$last"></md-divider>

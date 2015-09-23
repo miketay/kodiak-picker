@@ -42,22 +42,39 @@
 				return result;
 			};
 
+			$scope.full = function(tut) {
+				return tut.maxStudents == tut.students.length;
+			};
+
 			$scope.select = function(id, ev) {
 				var tut = find(id);
-				var conf = $mdDialog.confirm()
-					.parent(angular.element(document.body))
-					.title("Are you sure?")
-					.content("Register for "+tut.name+"?")
-					.ok("Yes")
-					.cancel("Cancel")
-					.targetEvent(ev);
-				$mdDialog.show(conf).then(function() {
-					StudentTutorialResource.register({student_id:StudentFactory.userId(), tutorial_id:id}, function(data) {
-						$scope.tutorial['open'] = tut;
+				if ($scope.full(tut)) {
+					$mdDialog.show(
+						$mdDialog.alert()
+							.parent(angular.element(document.body))
+							.clickOutsideToClose(true)
+							.title("Tutorial Full")
+							.content("Sorry, but this tutorial is full and cannot allow more students")
+							.ariaLabel("Tutorial Full")
+							.ok("OK")
+							.targetEvent(ev)
+					);
+				} else {
+					var conf = $mdDialog.confirm()
+						.parent(angular.element(document.body))
+						.title("Are you sure?")
+						.content("Register for "+tut.name+"?")
+						.ok("Yes")
+						.cancel("Cancel")
+						.targetEvent(ev);
+					$mdDialog.show(conf).then(function() {
+						StudentTutorialResource.register({student_id:StudentFactory.userId(), tutorial_id:id}, function(data) {
+							$scope.tutorial['open'] = tut;
+						});
+					}, function() {
+						// do nothing
 					});
-				}, function() {
-					// do nothing
-				});
+				}
 			};
 
 			$scope.registered = function(type) {
