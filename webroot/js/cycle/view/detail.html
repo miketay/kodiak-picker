@@ -1,9 +1,10 @@
 <div layout="column">
 	<md-list>
-		<md-list-item class="md-2-line" ng-repeat="tutorial in tutorials" ng-click="navigate(tutorial.id)">
+		<md-list-item class="md-3-line" ng-repeat="tutorial in tutorials" ng-click="navigate(tutorial.id)">
 			<div class="md-list-item-text">
-				<h3>{{tutorial.name}}</h3>
-				<p>{{tutorial.teacher_name}}</p>
+				<h3>{{tutorial.name}} <strong>{{tutorial.students.length}}/{{tutorial.max_students}}</strong></h3>
+				<p><strong>Teacher:</strong> {{tutorial.teacher_name}}</p>
+				<p><strong>Room #:</strong> {{tutorial.room_number}}</p>
 			</div>
 			<md-icon class="md-secondary" ng-click="edit(tutorial.id, $event)" md-svg-icon="create" aria-label="Edit {{tutorial.name}}" ng-if="admin()"><md-tooltip>Quick Edit</md-tooltip></md-icon>
 			<md-divider ng-if="!$last"></md-divider>
