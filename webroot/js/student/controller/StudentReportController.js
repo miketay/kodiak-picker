@@ -16,22 +16,22 @@
 				}
 			});
 
-			$scope.sort = "full_name";
+			$scope.sort = ["full_name", "last_name"];
 			$scope.reverse = false;
 
 			$scope.newSort = function(type) {
-				if ($scope.sort == type) {
+				if ($scope.sort[0] == type) {
 					$scope.reverse = !$scope.reverse;
 				}
-				$scope.sort = type;
+				$scope.sort = [type, "last_name"];
 			};
 
 			$scope.sortUp = function(type) {
-				return $scope.sort == type && $scope.reverse;
+				return $scope.sort[0] == type && $scope.reverse;
 			};
 
 			$scope.sortDown = function(type) {
-				return $scope.sort == type && !$scope.reverse;
+				return $scope.sort[0] == type && !$scope.reverse;
 			};
 		}]);
 })();
