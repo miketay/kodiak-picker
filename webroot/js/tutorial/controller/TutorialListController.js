@@ -43,7 +43,7 @@
 			};
 
 			$scope.full = function(tut) {
-				return tut.maxStudents <= tut.students.length;
+				return tut.max_students <= tut.students.length;
 			};
 
 			$scope.select = function(id, ev) {
