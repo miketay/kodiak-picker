@@ -25,9 +25,6 @@ a:hover {
 	height: auto;
 	width: 48px;
 }
-div md-content md-list {
-	padding-right: 60px;
-}
 md-list md-divider {
 	bottom: 0;
 	left: 0;
@@ -103,6 +100,12 @@ md-sidenav md-list .bubble {
 }
 
 /* Utils */
+.md-button.md-fab.md-fab-bottom-right {
+	position: fixed;
+}
+div md-content md-list {
+	padding-right: 40px;
+}
 md-list-item, md-list-item.md-list-item-inner {
 	display: -webkit-flex;
 	display: -ms-flexbox;
