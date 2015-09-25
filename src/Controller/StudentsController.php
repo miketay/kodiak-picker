@@ -172,7 +172,7 @@ class StudentsController extends AppController
 		$tutorial = $this->Students->Tutorials->get($tutorial_id, [
 			'contain' => ['Students']
 		]);
-		if (count($tutorial['students']) >= $tutorial['max_students']) {
+		if (!$this->request->session()->read('admin') && count($tutorial['students']) >= $tutorial['max_students']) {
 			throw new \Cake\Network\Exception\BadRequestException("full");
 		}
 		// see if they are already registered for a tutorial in this cycle
@@ -229,6 +229,7 @@ class StudentsController extends AppController
 		} else if ($data['first_name'] == "teacher") {
 			if ($this->request->data('password') == "D%d1Y") { // TODO: more dynamic?
 				$data['type'] = "teacher";
+				$this->request->session()->write('admin', false);
 				$this->set([
 					'student' => $data
 				]);
@@ -238,6 +239,7 @@ class StudentsController extends AppController
 		} else {
 			// then attempt to login a student
 			$student = $data;
+			$this->request->session()->write('admin', false);
 			unset($student['full_name']);
 			unset($student['tutorials']);
 			$password = $this->request->data('password');
