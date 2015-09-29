@@ -1,7 +1,7 @@
 <div layout="column">
 	<div layout="row" ng-if="admin()">
 		<md-button class="md-primary md-raised" ng-click="delete8($event)">Delete 8th Graders</md-button>
-		<md-button class="md-warn md-raised" ng-click="deleteAll($event)">Delete All Students</md-button>
+		<md-button class="md-warn md-raised" ng-click="deleteAll($event)">Delete All {{students.length}} Students</md-button>
 		<md-progress-circular class="md-warn" md-diameter="24" md-mode="indeterminate" ng-show="deleting"></md-progress-circular>
 	</div>
 	<md-list>
