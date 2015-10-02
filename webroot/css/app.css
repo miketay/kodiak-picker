@@ -70,8 +70,8 @@ md-sidenav  md-list {
 	padding: 0px 0px 8px 0px;
 }
 
-md-list-item.md-3-line .md-list-item-text > h3 {
-	line-height: 0.75em;
+md-list-item.md-3-line > .md-button .md-list-item-text > h3 {
+	line-height: 1em;
 	margin: 0 0 6px 0;
 }
 md-list-item.md-3-line .md-list-item-text > h4 {
