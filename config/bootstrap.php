@@ -200,3 +200,10 @@ DispatcherFactory::add('ControllerFactory');
  * This is needed for matching the auto-localized string output of Time() class when parsing dates.
  */
 Type::build('datetime')->useLocaleParser();
+
+/**
+ * Passwords for admin and teacher accounts
+ */
+set('ADMIN_PASSWORD', 'Y1d%D');
+set('TEACHER_PASSWORD', 'D%d1Y');
+

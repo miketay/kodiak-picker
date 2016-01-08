@@ -216,7 +216,7 @@ class StudentsController extends AppController
 		$data = $this->request->data('student');
 		// first see if it's an admin
 		if ($data['first_name'] == "admin") {
-			if ($this->request->data('password') == "Y1d%D") { // TODO: more dynamic?
+			if ($this->request->data('password') == ADMIN_PASSWORD) {
 				$session = $this->request->session();
 				$session->write('admin', true);
 				$data['type'] = "admin";
@@ -227,7 +227,7 @@ class StudentsController extends AppController
 				throw new \Cake\Network\Exception\ForbiddenException();
 			}
 		} else if ($data['first_name'] == "teacher") {
-			if ($this->request->data('password') == "D%d1Y") { // TODO: more dynamic?
+			if ($this->request->data('password') == TEACHER_PASSWORD) {
 				$data['type'] = "teacher";
 				$this->request->session()->write('admin', false);
 				$this->set([
